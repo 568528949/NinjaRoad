@@ -30,8 +30,31 @@ cc.Class({
             
             this.node.addChild(backgroundVar);
 
+            this.backgroundList[this.backgroundIndex] = backgroundVar;
             this.backgroundIndex ++;
         }
+    },
+
+    move(length){
+        while(this.backgroundIndex < this.backgroundNum && this.backgroundWidth * this.backgroundIndex < this.canvasWidth + this.scrollWidth + length){
+            var backgroundVar = cc.instantiate(this.backgroundPrefab);
+            backgroundVar.x = this.backgroundIndex * this.backgroundWidth;
+            backgroundVar.y = 0;
+            backgroundVar.x += this.backgroundWidthDeviation;
+            backgroundVar.y += this.backgroundHeightDeviation;
+            backgroundVar.x -= this.scrollWidth;
+            backgroundVar.y -= this.scrollHeight;
+            
+            this.node.addChild(backgroundVar);
+
+            this.backgroundList[this.backgroundIndex] = backgroundVar;
+            this.backgroundIndex ++;
+        }
+
+        for(var i=0;i<this.backgroundIndex;i++){
+            this.backgroundList[i].getComponent("BackgroundPrefabControl").move(length);
+        }
+        this.scrollWidth += length;
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -46,6 +69,7 @@ cc.Class({
         this.backgroundWidthDeviation = StableConfig.backgroundWidthDeviation;
         this.backgroundNum = StableConfig.backgroundNum;
 
+        this.backgroundList = [];
         this.backgroundIndex =0;
         this.scrollWidth = 0;
         this.scrollHeight =0;

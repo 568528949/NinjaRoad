@@ -12,31 +12,28 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        //Canvas相关参数
-        canvasHeight : 640,
-        canvasWidth : 1136,
+        
+    },
 
-        //Background相关参数
-        backgroundHeight : 640,
-        backgroundWidth : 500,
-        backgroundHeightDeviation : 0,
-        backgroundWidthDeviation : -318,
-        backgroundNum : 20,
-
-        //全局移动动画速度
-        moveSpeed : 0.2,
+    move(length){
+        this.sprite.getComponent("CameraControl").moveCanera(length);
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        //计算background的相关参数
-        
+        var StableConfig = cc.find("Canvas/ConfigLayer").getComponent("StableConfig");
+        this.moveSpeed = StableConfig.moveSpeed;
+
+        this.sprite = cc.find("Sprite",this.node.parent);
+
     },
 
     start () {
 
     },
 
-    // update (dt) {},
+    update (dt) {
+        this.move(10);
+    },
 });

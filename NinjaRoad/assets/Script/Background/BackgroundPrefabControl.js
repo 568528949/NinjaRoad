@@ -16,8 +16,10 @@ cc.Class({
     },
 
     move(length){
-        var moveVar = cc.moveTo(this.moveSpeed, cc.p(this.node.x - length, this.node.y));
+        
+        var moveVar = cc.moveTo(0, cc.p(this.node.x - length, this.node.y));
         this.node.runAction(moveVar);
+        
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -37,6 +39,5 @@ cc.Class({
         if(this.x < -this.canvasWidth){
             this.node.destroy();
         }
-        this.move(3);
     },
 });

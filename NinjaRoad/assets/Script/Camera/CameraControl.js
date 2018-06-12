@@ -12,31 +12,40 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        //Canvas相关参数
-        canvasHeight : 640,
-        canvasWidth : 1136,
+        hostNode:{
+            default : null,
+            type : cc.Node
+        },
 
-        //Background相关参数
-        backgroundHeight : 640,
-        backgroundWidth : 500,
-        backgroundHeightDeviation : 0,
-        backgroundWidthDeviation : -318,
-        backgroundNum : 20,
+        backgroundNode: {
+            default : null,
+            type : cc.Node
+        },
+    },
 
-        //全局移动动画速度
-        moveSpeed : 0.2,
+
+    moveCanera(length){
+
+        cc.find("Canvas/BackgroundLayer/Control").getComponent("BackgroundControl").move(length);
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        //计算background的相关参数
-        
+        var StableConfig = cc.find("Canvas/ConfigLayer").getComponent("StableConfig");
+        this.canvasHeight = StableConfig.canvasHeight;
+        this.canvasWidth = StableConfig.canvasWidth;
+        this.moveSpeed = StableConfig.moveSpeed;
+
+        this.hostNode = this.node;
+        this.hostX = this.hostNode.x;
+        this.hostY = this.hostNode.y;
     },
 
     start () {
-
+        
     },
 
-    // update (dt) {},
+    update (dt) {
+    },
 });
