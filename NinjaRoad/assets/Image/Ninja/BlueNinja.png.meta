@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "a76ac886-cfee-4c50-9e20-66160e35b8c3",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "BlueNinja": {
+      "ver": "1.0.3",
+      "uuid": "c304431d-f456-4610-a48f-ece7dd6f81d7",
+      "rawTextureUuid": "a76ac886-cfee-4c50-9e20-66160e35b8c3",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0.5,
+      "offsetY": 0,
+      "trimX": 6,
+      "trimY": 5,
+      "width": 39,
+      "height": 40,
+      "rawWidth": 50,
+      "rawHeight": 50,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

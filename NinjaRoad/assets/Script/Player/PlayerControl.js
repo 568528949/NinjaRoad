@@ -15,18 +15,26 @@ cc.Class({
         
     },
 
-    move(length){
-        this.sprite.getComponent("CameraControl").moveCanera(length);
+    move(length){      
+        if(this.playerSprite.x > this.canvasWidth/2)
+            return;
+
+        var lengthVar = length;
+        if(this.playerSprite.x + length > this.canvasWidth/2)
+            lengthVar = this.canvasWidth/2 - this.playerSprite.x;
+
+        var moveVar = cc.moveTo(this.moveSpeed, cc.p(this.playerSprite.x + lengthVar, this.playerSprite.y));
+        this.playerSprite.runAction(moveVar);
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
         var StableConfig = cc.find("Canvas/ConfigLayer").getComponent("StableConfig");
+        this.canvasWidth = StableConfig.canvasWidth;
         this.moveSpeed = StableConfig.moveSpeed;
 
-        this.sprite = cc.find("Sprite",this.node.parent);
-
+        this.playerSprite = cc.find("Sprite",this.node.parent);
     },
 
     start () {
@@ -34,6 +42,6 @@ cc.Class({
     },
 
     update (dt) {
-        this.move(10);
+       
     },
 });

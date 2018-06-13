@@ -15,29 +15,38 @@ cc.Class({
         
     },
 
-    move(length){
-        
-        var moveVar = cc.moveTo(this.moveSpeed, cc.p(this.node.x - length, this.node.y));
-        this.node.runAction(moveVar);
-        
+    initInput(){
+        this.node.on('mousedown', function (event) {
+            this.move(100);
+        }, this);
+
+        this.node.on('touchstart', function (event) {
+            
+        }, this);
+
+        //离开（触摸结束）响应，记录结束位置，根据差值判断是左移命令还是右移命令
+        this.node.on('mouseup', function (event) {
+            
+        }, this);
+
+        this.node.on('touchend', function (event) {
+            
+        }, this);
     },
 
+    move(length){
+        this.camera.moveCanera(length);
+    },
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad () {
-        var StableConfig = cc.find("Canvas/ConfigLayer").getComponent("StableConfig");
-        this.canvasWidth = StableConfig.canvasWidth;
-        this.moveSpeed = StableConfig.moveSpeed;
-        
-    },
+    // onLoad () {},
 
     start () {
-
+        this.camera = this.node.getComponent("CameraControl");
+        this.initInput();
     },
 
     update (dt) {
-        if(this.x < -this.canvasWidth){
-            this.node.destroy();
-        }
+        //this.move(1);
     },
 });

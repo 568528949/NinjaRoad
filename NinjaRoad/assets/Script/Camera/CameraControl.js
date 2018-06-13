@@ -12,7 +12,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        hostNode:{
+        playerNode:{
             default : null,
             type : cc.Node
         },
@@ -25,8 +25,23 @@ cc.Class({
 
 
     moveCanera(length){
+        if(this.playerSprite.x < 0 && length + this.playerSprite.x > 0){
+            this.playerControl.move(-this.playerSprite.x);
 
-        cc.find("Canvas/BackgroundLayer/Control").getComponent("BackgroundControl").move(length);
+            var remainLenghtVar = this.backgroundControl.move(length);
+            if(remainLenghtVar!=0){
+                this.playerControl.move(remainLenghtVar);
+            } 
+        }
+        else if(this.playerSprite.x < 0 && length + this.playerSprite.x <= 0){
+            this.playerControl.move(length);
+        }
+        else{
+            var remainLenghtVar = this.backgroundControl.move(length);
+            if(remainLenghtVar!=0){
+                this.playerControl.move(remainLenghtVar);
+            }
+        }
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -37,9 +52,9 @@ cc.Class({
         this.canvasWidth = StableConfig.canvasWidth;
         this.moveSpeed = StableConfig.moveSpeed;
 
-        this.hostNode = this.node;
-        this.hostX = this.hostNode.x;
-        this.hostY = this.hostNode.y;
+        this.playerControl = cc.find("Control",this.playerNode).getComponent("PlayerControl");
+        this.playerSprite = cc.find("Sprite",this.playerNode);
+        this.backgroundControl = cc.find("Control",this.backgroundNode).getComponent("BackgroundControl");
     },
 
     start () {
