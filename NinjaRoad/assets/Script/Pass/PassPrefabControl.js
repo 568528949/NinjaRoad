@@ -12,36 +12,36 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        passType: null,
+
+        //种类是平台时的参数
+        moveX1 : null,
+        moveX2 : null,
+        moveY1 : null,
+        moveY2 : null,
+
+    },
+
+    //平台相关方法
+    onCollisionEnter: function (other,self) {
+
+        this.node.destroy();
+
+    },
+
+    onBeginContatct:function(contact,selfCollider,otherCollider){
+        this.node.destroy();
+
+    },
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad () {
         
     },
 
-    initInput(){
-        this.node.on('mousedown', function (event) {
-            //this.move(100);
-        }, this);
-
-        this.node.on('touchstart', function (event) {
-            
-        }, this);
-
-        //离开（触摸结束）响应，记录结束位置，根据差值判断是左移命令还是右移命令
-        this.node.on('mouseup', function (event) {
-            
-        }, this);
-
-        this.node.on('touchend', function (event) {
-            
-        }, this);
-    },
-
-    // LIFE-CYCLE CALLBACKS:
-
-    // onLoad () {},
-
     start () {
-        this.initInput();
+
     },
 
-    update (dt) {
-    },
+    // update (dt) {},
 });

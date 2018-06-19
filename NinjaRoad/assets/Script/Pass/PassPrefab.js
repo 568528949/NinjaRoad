@@ -12,26 +12,23 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        
+        passType: null,//plat:平台
+
+        //种类是平台时的参数
+        moveX1 : null,
+        moveX2 : null,
+        moveY1 : null,
+        moveY2 : null,
+
     },
 
-    initInput(){
-        this.node.on('mousedown', function (event) {
-            //this.move(100);
-        }, this);
+    //平台相关方法
+    ifStandOn(player){
+        if(player.x >= this.moveX1 && player.x <= this.moveX2 && player.y >= this.moveY1 && player.y <= thsi.moveY2){
+            return true;
+        }
 
-        this.node.on('touchstart', function (event) {
-            
-        }, this);
-
-        //离开（触摸结束）响应，记录结束位置，根据差值判断是左移命令还是右移命令
-        this.node.on('mouseup', function (event) {
-            
-        }, this);
-
-        this.node.on('touchend', function (event) {
-            
-        }, this);
+        return false;
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -39,9 +36,8 @@ cc.Class({
     // onLoad () {},
 
     start () {
-        this.initInput();
+
     },
 
-    update (dt) {
-    },
+    // update (dt) {},
 });

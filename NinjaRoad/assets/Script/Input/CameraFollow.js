@@ -12,36 +12,33 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        
+        cameraNode:{
+            default : null,
+            type : cc.Node
+        },
     },
 
-    initInput(){
-        this.node.on('mousedown', function (event) {
-            //this.move(100);
-        }, this);
-
-        this.node.on('touchstart', function (event) {
-            
-        }, this);
-
-        //离开（触摸结束）响应，记录结束位置，根据差值判断是左移命令还是右移命令
-        this.node.on('mouseup', function (event) {
-            
-        }, this);
-
-        this.node.on('touchend', function (event) {
-            
-        }, this);
+    setCameraNodeLocation(){
+        if(this.node.x <= this.canvasWidth/2)
+            this.cameraNode.x = 0;
+        else
+            this.cameraNode.x = this.node.x - this.canvasWidth/2;
     },
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
+    onLoad () {
+        var StableConfig = cc.find("Canvas/ConfigLayer").getComponent("StableConfig");
+        this.canvasHeight = StableConfig.canvasHeight;
+        this.canvasWidth = StableConfig.canvasWidth;
+    },
 
     start () {
-        this.initInput();
+
     },
 
     update (dt) {
+        //this.node.parent.x = 568;
+        this.setCameraNodeLocation();
     },
 });

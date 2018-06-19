@@ -17,20 +17,30 @@ cc.Class({
         canvasWidth : 1136,
 
         //Background相关参数
-        backgroundHeight : 640,
+        backgroundHeight : 550,
         backgroundWidth : 500,
-        backgroundHeightDeviation : 0,
-        backgroundWidthDeviation : -318,
         backgroundNum : 20,
 
         //全局移动动画速度
         moveSpeed : 0.2,
+
+        //碰撞相关
+        enabledDebugDraw : false,
+        enabledDrawBoundingBox : false,
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
         //计算background的相关参数
+
+        //启动物理系统
+        cc.director.getPhysicsManager().enabled = true;
+
+        //碰撞系统
+        cc.director.getCollisionManager().enabled = true;                                           //true为启动碰撞
+        cc.director.getCollisionManager().enabledDebugDraw = this.enabledDebugDraw;                 //true为显示碰撞检测范围
+        cc.director.getCollisionManager().enabledDrawBoundingBox = this.enabledDrawBoundingBox;     //true为显示组件包围盒
         
     },
 
