@@ -15,16 +15,40 @@ cc.Class({
         
     },
 
-    move(length){      
-        if(this.playerSprite.x > this.canvasWidth/2)
-            return;
+    //跑步动作相关
+    runNow(){
+        this.run = true;
+    },
 
-        var lengthVar = length;
-        if(this.playerSprite.x + length > this.canvasWidth/2)
-            lengthVar = this.canvasWidth/2 - this.playerSprite.x;
+    actionRun(){
+        if(this.run == true){
+            this.getComponent(cc.RigidBody).linearVelocity = cc.v2(300,0);
+            this.runing = true;
+            this.stoping = false;
+            this.run = false;
+        }
+    },
 
-        var moveVar = cc.moveTo(this.moveSpeed, cc.p(this.playerSprite.x + lengthVar, this.playerSprite.y));
-        this.playerSprite.runAction(moveVar);
+    //停止动作相关
+    stopNow(){
+        this.stop = true;
+    },
+
+    actionStop(){
+        if(this.stop == true){
+            this.getComponent(cc.RigidBody).linearVelocity = cc.v2(0,0);
+            this.stoping = true;
+            this.runing = false;
+            this.stop = false;
+        }
+    },
+
+    //跳跃动作相关
+    jumpNow(){
+        this.jump = true;
+    },
+
+    actionJump(){
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -35,6 +59,26 @@ cc.Class({
         this.moveSpeed = StableConfig.moveSpeed;
 
         this.playerSprite = cc.find("Sprite",this.node.parent);
+
+        //玩家相关动作控制
+        this.run = false;
+        this.runing = false;
+
+        this.stop = false;
+        this.stoping = true;
+
+        this.jump = false;
+        this.jumping = false;
+
+        this.drop = false;
+        this.droping = true;
+
+        this.speedUp = false;
+        this.speedDown = false;
+        
+
+        this.actionJump();
+        
     },
 
     start () {
@@ -42,6 +86,7 @@ cc.Class({
     },
 
     update (dt) {
-       
+       this.actionRun();
+       this.actionStop();
     },
 });

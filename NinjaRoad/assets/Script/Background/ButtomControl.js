@@ -15,20 +15,13 @@ cc.Class({
         
     },
 
-    //平台相关方法
-    onBeginContact(contact, self, other) {
-        other.getComponent("PlayerControl").runNow();
-        other.getComponent("PlayerControl").jumpNow();
+    onBeginContact(contact, self, other){
+        other.getComponent("PlayerControl").stopNow();
     },
 
-    onEndContact(contact, self, other){
-        //other.getComponent("PlayerControl").stopNow();
-    },
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad () {
-        
-    },
+    // onLoad () {},
 
     start () {
 
