@@ -18,10 +18,10 @@ cc.Class({
     //平台相关方法
     onBeginContact(contact, self, other) {
         other.getComponent("PlayerControl").runNow();
-        other.getComponent("PlayerControl").jumpNow();
     },
 
     onEndContact(contact, self, other){
+        other.getComponent("PlayerControl").downNow();
         //other.getComponent("PlayerControl").stopNow();
     },
     // LIFE-CYCLE CALLBACKS:

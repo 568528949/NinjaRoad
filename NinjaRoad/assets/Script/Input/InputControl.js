@@ -12,12 +12,15 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        
+        controlNode:{
+            default : null,
+            type : cc.Node
+        }
     },
 
     initInput(){
         this.node.on('mousedown', function (event) {
-            //this.move(100);
+            this.playerControl.jumpNow();
         }, this);
 
         this.node.on('touchstart', function (event) {
@@ -39,6 +42,8 @@ cc.Class({
     // onLoad () {},
 
     start () {
+        this.playerControl = this.controlNode.getComponent("PlayerControl");
+
         this.initInput();
     },
 

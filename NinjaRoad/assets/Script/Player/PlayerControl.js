@@ -24,7 +24,9 @@ cc.Class({
         if(this.run == true){
             this.getComponent(cc.RigidBody).linearVelocity = cc.v2(300,0);
             this.runing = true;
+            this.jumping = false;
             this.stoping = false;
+            this.downing =false;
             this.run = false;
         }
     },
@@ -39,17 +41,38 @@ cc.Class({
             this.getComponent(cc.RigidBody).linearVelocity = cc.v2(0,0);
             this.stoping = true;
             this.runing = false;
+            this.jumping = false;
             this.stop = false;
         }
     },
 
+
     //跳跃动作相关
     jumpNow(){
-        this.jump = true;
+        if(this.jumping == false && this.downing == false)
+            this.jump = true;
     },
 
     actionJump(){
+        if(this.jump == true){
+            this.getComponent(cc.RigidBody).linearVelocity = cc.v2(300,800);
+            this.jumping = true;
+            this.downing = false;
+            this.jump = false;
+        }
     },
+
+    downNow(){
+        this.down = true;
+    },
+
+    actionDown(){
+        if(this.down == true){
+            this.downing = true;
+            this.jumping = true;
+            this.down = false;
+        }
+    }, 
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -70,14 +93,15 @@ cc.Class({
         this.jump = false;
         this.jumping = false;
 
+        this.down = false;
+        this.downing = true;
+
         this.drop = false;
         this.droping = true;
 
         this.speedUp = false;
         this.speedDown = false;
         
-
-        this.actionJump();
         
     },
 
@@ -88,5 +112,7 @@ cc.Class({
     update (dt) {
        this.actionRun();
        this.actionStop();
+       this.actionJump();
+       this.actionDown();
     },
 });
