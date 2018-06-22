@@ -12,26 +12,35 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        
+        //对话框的prefab
+        dialogPreFab : {
+            default : null,
+            type : cc.Prefab
+        },
     },
 
-    //平台相关方法
-    onBeginContact(contact, self, other) {
-        other.getComponent("PlayerControl").runNow(300);
+    //显示对话框
+    showDialog(){    
+        var dialog = cc.instantiate(this.dialogPreFab);
+        this.node.addChild(dialog);
+
+        this.dialog = dialog;
     },
 
-    onEndContact(contact, self, other){
-        other.getComponent("PlayerControl").jumpNow(0,0,0);
-    },
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        
+        //当前对话框是否显示
+        this.isShowDialog = false;
+
+        //当前显示的对话框
+        this.dialog = null;
     },
 
     start () {
 
     },
 
-    // update (dt) {},
+    update (dt) {
+    },
 });

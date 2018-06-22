@@ -20,11 +20,11 @@ cc.Class({
 
     initInput(){
         this.node.on('mousedown', function (event) {
-            this.playerControl.jumpNow();
+            this.playerControl.jumpNow(300,800,1);
         }, this);
 
         this.node.on('touchstart', function (event) {
-            
+            this.playerControl.jumpNow(300,300,1);
         }, this);
 
         //离开（触摸结束）响应，记录结束位置，根据差值判断是左移命令还是右移命令

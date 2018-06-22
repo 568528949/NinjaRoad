@@ -29,17 +29,23 @@ cc.Class({
         // },
     },
 
+    initControl(){
+        //点击后（按压后）的响应函数，重新开始游戏
+        this.node.on('mousedown', function (event) {
+            cc.game.restart();
+            //cc.director.loadScene("PlayFire");
+        }, this);
 
-    showGameOverDialog(){
-        cc.find("Canvas/MessageLayer/Control").getComponent("DialogControl").showDialog();
+        this.node.on('touchstart', function (event) {
+            cc.game.restart();
+            //cc.director.loadScene("PlayFire");
+        }, this);
     },
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
-
-    start () {
-
+    onLoad () {
+        this.initControl();
     },
 
     // update (dt) {},

@@ -15,64 +15,97 @@ cc.Class({
         
     },
 
-    //跑步动作相关
-    runNow(){
-        this.run = true;
-    },
 
-    actionRun(){
-        if(this.run == true){
-            this.getComponent(cc.RigidBody).linearVelocity = cc.v2(300,0);
-            this.runing = true;
-            this.jumping = false;
-            this.stoping = false;
-            this.downing =false;
-            this.run = false;
-        }
-    },
-
-    //停止动作相关
-    stopNow(){
-        this.stop = true;
-    },
-
-    actionStop(){
-        if(this.stop == true){
-            this.getComponent(cc.RigidBody).linearVelocity = cc.v2(0,0);
-            this.stoping = true;
-            this.runing = false;
-            this.jumping = false;
-            this.stop = false;
-        }
-    },
-
-
-    //跳跃动作相关
-    jumpNow(){
-        if(this.jumping == false && this.downing == false)
+    //跳状态作相关
+    jumpNow(jumpSpeedX,jumpSpeedY,jumpType){
+        if(this.runing == true && this.stoping == false){
             this.jump = true;
+            this.jumpSpeedX = jumpSpeedX;
+            this.jumpSpeedY = jumpSpeedY;
+            this.jumpType = jumpType;
+        }   
     },
 
     actionJump(){
         if(this.jump == true){
-            this.getComponent(cc.RigidBody).linearVelocity = cc.v2(300,800);
-            this.jumping = true;
-            this.downing = false;
             this.jump = false;
+
+            if(this.jumpType == 1)//临时，以后对跳跃进行分类，现在用跳跃y速度为0代表坠落（空跳）
+                this.getComponent(cc.RigidBody).linearVelocity = cc.v2(this.jumpSpeedX,this.jumpSpeedY);
+
+            this.changeActionState("jumping");
+        }
+    },
+    
+    //跑步状态相关
+    runNow(runSpeed){
+        if(this.jumping == true && this.stoping == false){
+            this.run = true;
+            this.runSpeed = runSpeed;
+        }     
+    },
+
+    actionRun(speedx){
+        if(this.run == true){
+            this.run = false;
+
+            this.getComponent(cc.RigidBody).linearVelocity = cc.v2(this.runSpeed,0);
+
+            this.changeActionState("runing");      
         }
     },
 
-    downNow(){
-        this.down = true;
+    //停止状态相关
+    stopNow(){
+        if(true)
+            this.stop = true;
     },
 
-    actionDown(){
-        if(this.down == true){
-            this.downing = true;
+    actionStop(){
+        if(this.stop == true){
+            this.stop = false;
+            this.getComponent(cc.RigidBody).linearVelocity = cc.v2(0,0);
+
+            this.changeActionState("stoping");   
+            
+            cc.find("Canvas/ConfigLayer").getComponent("GameConfig").showGameOverDialog();
+        }
+    },
+
+
+    //改变目前运动状态，jumping、runing、stoping
+    changeActionState(state){
+        this.jumping = false;
+        this.runing = false;
+        this.stoping = false;
+
+        if(state == "jumping")
             this.jumping = true;
-            this.down = false;
-        }
-    }, 
+        else if(state == "runing")
+            this.runing = true;
+        else if(state == "stoping")
+            this.stoping = true;
+    },
+
+    initAction(){
+        //玩家相关动作控制
+        this.jump = false;
+        this.jumping = false;
+
+        this.run = false;
+        this.runing = false;
+
+        this.stop = false;
+        this.stoping = false;
+
+        this.changeActionState("jumping");
+
+        this.jumpSpeedX = 300;
+        this.jumpSpeedY = 300;
+        this.jumpType = 1;
+
+        this.runSpeed = 300;
+    },
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -82,27 +115,8 @@ cc.Class({
         this.moveSpeed = StableConfig.moveSpeed;
 
         this.playerSprite = cc.find("Sprite",this.node.parent);
-
-        //玩家相关动作控制
-        this.run = false;
-        this.runing = false;
-
-        this.stop = false;
-        this.stoping = true;
-
-        this.jump = false;
-        this.jumping = false;
-
-        this.down = false;
-        this.downing = true;
-
-        this.drop = false;
-        this.droping = true;
-
-        this.speedUp = false;
-        this.speedDown = false;
         
-        
+        this.initAction();
     },
 
     start () {
@@ -110,9 +124,8 @@ cc.Class({
     },
 
     update (dt) {
-       this.actionRun();
-       this.actionStop();
-       this.actionJump();
-       this.actionDown();
+        this.actionJump();
+        this.actionRun();
+        this.actionStop(); 
     },
 });
