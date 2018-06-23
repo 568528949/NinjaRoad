@@ -12,26 +12,18 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        passType: null,//plat:平台
-
-        //种类是平台时的参数
-        moveX1 : null,
-        moveX2 : null,
-        moveY1 : null,
-        moveY2 : null,
-
-    },
-
-    //平台相关方法
-    ifStandOn(player){
-        if(player.x >= this.moveX1 && player.x <= this.moveX2 && player.y >= this.moveY1 && player.y <= thsi.moveY2){
-            return true;
-        }
-
-        return false;
+        
     },
 
     // LIFE-CYCLE CALLBACKS:
+
+    onBeginContact(contact, self, other) {
+        other.getComponent("PlayerControl").reboundNow(300,1200);
+    },
+
+    onEndContact(contact, self, other){
+        other.getComponent("PlayerControl").jumpNow(0,0,0);
+    },
 
     // onLoad () {},
 
