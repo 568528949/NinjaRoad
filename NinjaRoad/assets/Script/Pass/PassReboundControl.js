@@ -18,7 +18,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onBeginContact(contact, self, other) {
-        other.getComponent("PlayerControl").reboundNow(300,1200);
+        other.getComponent("PlayerControl").pauseNow("reboundpause");
     },
 
     onEndContact(contact, self, other){

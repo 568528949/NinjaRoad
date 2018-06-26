@@ -71,7 +71,7 @@ cc.Class({
 
     //反弹状态相关
     reboundNow(reboundSpeedX,reboundSpeedY){
-        if(this.jumping == true && this.stoping == false){
+        if(this.jumping == true || this.pauseing == true && this.stoping == false){
             this.rebound = true;
             this.reboundSpeedX = reboundSpeedX;
             this.reboundSpeedY = reboundSpeedY;
@@ -89,11 +89,15 @@ cc.Class({
     },
 
     //暂停和继续状态相关
-    pauseNow(){
-        if(this.pauseing == false && this.stoping == false)
+    pauseNow(pauseReason){
+        if(this.pauseing == false && this.stoping == false){
             this.pause = true;
-        else if(this.pauseing == true && this.stoping == false)
+            this.pauseReason = pauseReason;
+        }
+        else if(this.pauseing == true && this.stoping == false){
             this.continue = true;
+            this.pauseReason = "notpause";
+        }     
     },
 
     actionPause(){
@@ -119,6 +123,10 @@ cc.Class({
             this.getComponent(cc.RigidBody).gravityScale = this.pauseGravityScale;
             this.changeActionState(this.pauseState);
         }
+    },
+
+    getPauseReason(){
+        return this.pauseReason;
     },
 
     //停止状态相关
@@ -201,6 +209,7 @@ cc.Class({
         this.pauseSpeedY = 0;
         this.pauseGravityScale = 0;
         this.pauseState = "";
+        this.pauseReason = "notpause";
     },
 
     // LIFE-CYCLE CALLBACKS:
