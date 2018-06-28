@@ -18,11 +18,13 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onBeginContact(contact, self, other) {
-        other.getComponent("PlayerControl").pauseNow("reboundpause");
+        other.getComponent("PlayerControl").pauseNow();
+        other.getComponent("PlayerControl").setInputModel("rebound");
     },
 
     onEndContact(contact, self, other){
         other.getComponent("PlayerControl").jumpNow(0,0,0);
+        other.getComponent("PlayerControl").setInputModel("jump");
     },
 
     // onLoad () {},

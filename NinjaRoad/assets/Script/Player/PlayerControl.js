@@ -15,6 +15,15 @@ cc.Class({
         
     },
 
+    //角色标签相关
+    getInputModel(){
+        return this.inputModel;
+    },
+
+    setInputModel(inputModel){
+        this.inputModel = inputModel;
+    },
+
     //站立动作相关
     standNow(){
         if(this.runing  == true && this.stoping == false){
@@ -89,14 +98,12 @@ cc.Class({
     },
 
     //暂停和继续状态相关
-    pauseNow(pauseReason){
+    pauseNow(){
         if(this.pauseing == false && this.stoping == false){
             this.pause = true;
-            this.pauseReason = pauseReason;
         }
         else if(this.pauseing == true && this.stoping == false){
             this.continue = true;
-            this.pauseReason = "notpause";
         }     
     },
 
@@ -125,9 +132,6 @@ cc.Class({
         }
     },
 
-    getPauseReason(){
-        return this.pauseReason;
-    },
 
     //停止状态相关
     stopNow(){
@@ -209,7 +213,8 @@ cc.Class({
         this.pauseSpeedY = 0;
         this.pauseGravityScale = 0;
         this.pauseState = "";
-        this.pauseReason = "notpause";
+
+        this.inputModel = "nothing";
     },
 
     // LIFE-CYCLE CALLBACKS:
