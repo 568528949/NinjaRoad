@@ -12,17 +12,36 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        
+        angleDeviation : 10,
+    },
+
+    ropeShow(){
+        this.node.opacity = 255;
+    },
+
+    ropeHide(){
+        this.node.opacity = 0;
+    },
+
+    hanged(beginX,beginY,angle,ropePointLoc){
+        this.beginX = beginX;
+        this.beginY = beginY;
+
+        this.angle = 90-Math.atan((ropePointLoc.y - this.beginY)/(ropePointLoc.x - this.beginX)) * 180 /Math.PI;
+
+        if(this.angle - angle <= this.angleDeviation && this.angle - angle >= -this.angleDeviation )
+            return true;
+        else
+            return false;
+    },
+
+    swing(){
+
     },
 
     // LIFE-CYCLE CALLBACKS:
-    onBeginContact(contact, self, other) {
-        other.getComponent("PlayerControl").setRopeInput(true);
-        other.getComponent("PlayerControl").setRopePointLoc(this.node.x,this.node.y);
-    },
 
-    onLoad () {
-    },
+    // onLoad () {},
 
     start () {
 

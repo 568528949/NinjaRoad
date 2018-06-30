@@ -19,12 +19,12 @@ cc.Class({
 
     onBeginContact(contact, self, other) {
         other.getComponent("PlayerControl").pauseNow();
-        other.getComponent("PlayerControl").setInputModel("rebound");
+        other.getComponent("PlayerControl").setReboundInput(true);
     },
 
     onEndContact(contact, self, other){
         other.getComponent("PlayerControl").jumpNow(0,0,0);
-        other.getComponent("PlayerControl").setInputModel("jump");
+        other.getComponent("PlayerControl").setReboundInput(false);   
     },
 
     // onLoad () {},

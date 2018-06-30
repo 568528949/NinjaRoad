@@ -15,13 +15,32 @@ cc.Class({
         
     },
 
-    //角色标签相关
-    getInputModel(){
-        return this.inputModel;
+    //角色控制相关
+    initInputModel(){
+        this.jumpInput = true;
+        this.reboundInput = false;
+        this.ropeInput = false;
     },
 
-    setInputModel(inputModel){
-        this.inputModel = inputModel;
+    getJumpInput(){
+        return this.jumpInput;
+    },
+    setJumpInput(inputModel){
+        this.jumpInput = inputModel;
+    },
+    
+    getReboundInput(){
+        return this.reboundInput;
+    },
+    setReboundInput(inputModel){
+        this.reboundInput = inputModel;
+    },
+
+    getRopeInput(){
+        return this.ropeInput;
+    },
+    setRopeInput(inputModel){
+        this.ropeInput = inputModel;
     },
 
     //站立动作相关
@@ -97,6 +116,27 @@ cc.Class({
         }
     },
 
+    //绳索状态相关
+    setRopePointLoc(ropePointX,ropePointY){
+        this.ropePointLoc = cc.v2(ropePointX,ropePointY);
+    },
+    getRopePointLoc(){
+        return this.ropePointLoc;
+    },
+
+    swingNow(){
+        if(this.jumping == true || this.pauseing == true && this.stoping == false){
+            this.swing = true;
+        }
+    },
+    actionSwing(){
+        if(this.swing == true){
+            this.swing = false;
+
+            this.changeActionState("swinging");
+        }
+    },
+
     //暂停和继续状态相关
     pauseNow(){
         if(this.pauseing == false && this.stoping == false){
@@ -157,6 +197,7 @@ cc.Class({
         this.jumping = false;
         this.runing = false;
         this.rebounding = false;
+        this.swing = false;
         this.pauseing = false;
         this.stoping = false;
 
@@ -168,6 +209,8 @@ cc.Class({
             this.runing = true;
         else if(state == "rebounding")
             this.rebounding = true;
+        else if(state == "swinging")
+            this.swinging = true;
         else if(state == "pauseing")
             this.pauseing = true;
         else if(state == "stoping")
@@ -190,6 +233,9 @@ cc.Class({
 
         this.rebound = false;
         this.rebounding = false;
+
+        this.swing = false;
+        this.swinging = false;
 
         this.pause = false
         this.continue = false;
@@ -214,7 +260,6 @@ cc.Class({
         this.pauseGravityScale = 0;
         this.pauseState = "";
 
-        this.inputModel = "nothing";
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -227,6 +272,7 @@ cc.Class({
         this.playerSprite = cc.find("Sprite",this.node.parent);
         
         this.initAction();
+        this.initInputModel();
     },
 
     start () {
@@ -240,6 +286,7 @@ cc.Class({
         this.actionPause();
         this.actionContinue();
         this.actionRebound();
+        this.actionSwing();
         this.actionStop(); 
     },
 });

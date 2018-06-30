@@ -31,21 +31,27 @@ cc.Class({
     initInput(){
         this.node.on('mousedown', function (event) {
 
-            if(this.playerControl.getInputModel() == "nothing")
-                return;
-            else if(this.playerControl.getInputModel() == "jump")
+            if(this.playerControl.getJumpInput() == true){
                 this.playerControl.jumpNow(300,800,1);
+                this.playerControl.setJumpInput(false);
+            } 
 
-            else if(this.playerControl.getInputModel() == "rebound"){
+            if(this.playerControl.getReboundInput() == true){
                 this.beginX = event.getLocation().x;
                 this.beginY = event.getLocation().y;
                 this.ifBegin = true;
             }
 
-            else if(this.playerControl.getInputModel() == "rope"){
+            if(this.playerControl.getRopeInput() == true && this.playerControl.jumping == true){
                 this.playerControl.pauseNow();
                 this.beginX = event.getLocation().x;
                 this.beginY = event.getLocation().y;
+
+                this.ropeVar = cc.instantiate(this.ropePrefab);
+                this.controlNode.addChild(this.ropeVar);
+
+                this.ropeVar.getComponent("RopeControl").ropeHide();
+
                 this.ifBegin = true;
             }
 
@@ -54,14 +60,7 @@ cc.Class({
         //鼠标离开和触控离开响应函数
         this.node.on('mouseup', function (event) {
 
-            
-            if(this.playerControl.getInputModel() == "nothing")
-                return;
-
-            else if(this.playerControl.getInputModel() == "jump")
-                return;
-
-            else if(this.playerControl.getInputModel() == "rebound"){
+            if(this.playerControl.getReboundInput() == true){
                 this.playerControl.pauseNow();
                 var reboundSpeedX,reboundSpeedY;
                 var speed = 1200;
@@ -71,10 +70,15 @@ cc.Class({
                 
                 this.ifBegin = false;
             }
-            else if(this.playerControl.getInputModel() == "rope"){
+            if(this.playerControl.getRopeInput() == true && this.playerControl.pauseState == "jumping"){
+                if(this.ifBegin == false)
+                    return;
+
                 this.playerControl.pauseNow();
-                this.ropeVar = cc.instantiate(this.ropePrefab);
-                this.controlNode.addChild(this.ropeVar);
+                this.ropeVar.getComponent("RopeControl").ropeShow();
+
+                this.ropeVar.getComponent("RopeControl").hanged(this.playerControl.node.x,this.playerControl.node.y,this.angle,this.playerControl.getRopePointLoc());
+                
                 this.ifBegin = false;
             }
 
@@ -83,13 +87,8 @@ cc.Class({
 
         //鼠标移动和触控移动响应函数
         this.node.on('mousemove', function (event) {
-            if(this.playerControl.getInputModel() == "nothing")
-                return;
 
-            else if(this.playerControl.getInputModel() == "jump")
-                return;
-
-            else if(this.playerControl.getInputModel() == "rebound"){
+            if(this.playerControl.getReboundInput() == true){
 
                 if(this.ifBegin == false) 
                     return;
@@ -105,7 +104,7 @@ cc.Class({
                     this.angle = 90;
             }
 
-            else if(this.playerControl.getInputModel() == "rope"){
+            if(this.playerControl.getRopeInput() == true && this.playerControl.pauseState == "jumping"){
 
                 if(this.ifBegin == false) 
                     return;
@@ -113,12 +112,12 @@ cc.Class({
                 this.endX = event.getLocation().x;
                 this.endY = event.getLocation().y;
     
-                this.angle = Math.atan((this.endY - this.beginY)/(this.endX - this.beginX)) * 180 /Math.PI;
+                this.angle = 90 - Math.atan((this.endY - this.beginY)/(this.endX - this.beginX)) * 180 /Math.PI;
     
                 if(this.angle > 90 && this.endX >= this.beginX)
-                    this.angle = 0;
-                else if(this.angle > 90 && this.endX < this.beginX)
                     this.angle = 90;
+                else if(this.angle > 90 && this.endX < this.beginX)
+                    this.angle = 0;
 
                 var rotateAction = cc.rotateTo(0,this.angle);
                 this.ropeVar.runAction(rotateAction);

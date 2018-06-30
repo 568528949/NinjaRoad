@@ -18,12 +18,11 @@ cc.Class({
     //平台相关方法
     onBeginContact(contact, self, other) {
         other.getComponent("PlayerControl").runNow(300);
-        other.getComponent("PlayerControl").setInputModel("jump");
+        other.getComponent("PlayerControl").setJumpInput(true);
     },
 
     onEndContact(contact, self, other){
         other.getComponent("PlayerControl").jumpNow(0,0,0);
-        other.getComponent("PlayerControl").setInputModel("nothing");
     },
     // LIFE-CYCLE CALLBACKS:
 
