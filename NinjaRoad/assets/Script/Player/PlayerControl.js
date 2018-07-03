@@ -61,60 +61,38 @@ cc.Class({
     //跳状态作相关
     jumpNow(jumpSpeedX,jumpSpeedY,jumpType){
         if((this.runing == true || this.rebounding == true) && this.stoping == false){
-            this.jump = true;
             this.jumpSpeedX = jumpSpeedX;
             this.jumpSpeedY = jumpSpeedY;
             this.jumpType = jumpType;
-        }   
-    },
-
-    actionJump(){
-        if(this.jump == true){
-            this.jump = false;
 
             if(this.jumpType == 1)//跳跃种类为1为普通跳跃
                 this.getComponent(cc.RigidBody).linearVelocity = cc.v2(this.jumpSpeedX,this.jumpSpeedY);
 
             this.changeActionState("jumping");
-        }
+        }   
     },
     
     //跑步状态相关
     runNow(runSpeed){
         if(this.jumping == true && this.stoping == false){
-            this.run = true;
             this.runSpeed = runSpeed;
-        }     
-    },
-
-    actionRun(){
-        if(this.run == true){
-            this.run = false;
 
             this.getComponent(cc.RigidBody).linearVelocity = cc.v2(this.runSpeed,0);
 
-            this.changeActionState("runing");      
-        }
+            this.changeActionState("runing");
+        }     
     },
 
     //反弹状态相关
     reboundNow(reboundSpeedX,reboundSpeedY){
         if(this.jumping == true || this.pauseing == true && this.stoping == false){
-            this.rebound = true;
             this.reboundSpeedX = reboundSpeedX;
             this.reboundSpeedY = reboundSpeedY;
-        }
-    },
-
-    actionRebound(){
-        if(this.rebound == true){
-            this.rebound = false;
-
             this.getComponent(cc.RigidBody).linearVelocity = cc.v2(this.reboundSpeedX,this.reboundSpeedY);
-
             this.changeActionState("rebounding");
         }
     },
+
 
     //绳索状态相关
     setRopePointLoc(ropePointX,ropePointY){
@@ -124,14 +102,16 @@ cc.Class({
         return this.ropePointLoc;
     },
 
-    swingNow(){
+    swingNow(swingR,swingAngle,swingDev){
         if(this.jumping == true || this.pauseing == true && this.stoping == false){
-            this.swing = true;
-        }
-    },
-    actionSwing(){
-        if(this.swing == true){
-            this.swing = false;
+            this.swingR = swingR;
+            this.swingAngle = swingAngle;
+            this.swingDev = swingDev;
+
+            var MyAction = cc.find("Canvas/ConfigLayer").getComponent("MyAction");
+            this.getComponent(cc.RigidBody).linearVelocity = cc.v2(0,0);
+            this.getComponent(cc.RigidBody).gravityScale = 0;
+            MyAction.actionCircleMovePre(this.node,this.swingR,this.swingAngle,this.swingDev);
 
             this.changeActionState("swinging");
         }
@@ -140,54 +120,33 @@ cc.Class({
     //暂停和继续状态相关
     pauseNow(){
         if(this.pauseing == false && this.stoping == false){
-            this.pause = true;
-        }
-        else if(this.pauseing == true && this.stoping == false){
-            this.continue = true;
-        }     
-    },
-
-    actionPause(){
-        if(this.pause == true){
-            this.pause = false;
-
             this.pauseSpeedX = this.getComponent(cc.RigidBody).linearVelocity.x;
             this.pauseSpeedY = this.getComponent(cc.RigidBody).linearVelocity.y;
             this.pauseGravityScale = this.getComponent(cc.RigidBody).gravityScale;
             this.getComponent(cc.RigidBody).linearVelocity = cc.v2(0,0);
             this.getComponent(cc.RigidBody).gravityScale = 0;
-            this.pauseState = this.state;
-
-            this.changeActionState("pauseing");
+            this.pauseing = true;
         }
-    },
-
-    actionContinue(){
-        if(this.continue == true){
-            this.continue = false;
+        else if(this.pauseing == true && this.stoping == false){
 
             this.getComponent(cc.RigidBody).linearVelocity = cc.v2(this.pauseSpeedX,this.pauseSpeedY);
             this.getComponent(cc.RigidBody).gravityScale = this.pauseGravityScale;
-            this.changeActionState(this.pauseState);
-        }
+            this.pauseing = false;
+        }     
     },
 
 
     //停止状态相关
     stopNow(){
         if(true)
-            this.stop = true;
-    },
-
-    actionStop(){
-        if(this.stop == true){
-            this.stop = false;
+        {
             this.getComponent(cc.RigidBody).linearVelocity = cc.v2(0,0);
 
             this.changeActionState("stoping");   
-            
+        
             cc.find("Canvas/ConfigLayer").getComponent("GameConfig").showGameOverDialog();
         }
+        
     },
 
 
@@ -198,7 +157,6 @@ cc.Class({
         this.runing = false;
         this.rebounding = false;
         this.swing = false;
-        this.pauseing = false;
         this.stoping = false;
 
         if(state == "standing")
@@ -211,8 +169,6 @@ cc.Class({
             this.rebounding = true;
         else if(state == "swinging")
             this.swinging = true;
-        else if(state == "pauseing")
-            this.pauseing = true;
         else if(state == "stoping")
             this.stoping = true;
 
@@ -222,27 +178,14 @@ cc.Class({
 
     initAction(){
         //玩家相关动作控制
-        this.stand = false;
         this.standing = false
-
-        this.jump = false;
         this.jumping = false;
-
-        this.run = false;
         this.runing = false;
-
-        this.rebound = false;
         this.rebounding = false;
-
-        this.swing = false;
         this.swinging = false;
-
-        this.pause = false
-        this.continue = false;
-        this.pauseing = false;
-
-        this.stop = false;
         this.stoping = false;
+
+        this.pauseing = false;
 
         this.changeActionState("jumping");
 
@@ -280,13 +223,5 @@ cc.Class({
     },
 
     update (dt) {
-        this.actionStand();
-        this.actionJump();
-        this.actionRun();
-        this.actionPause();
-        this.actionContinue();
-        this.actionRebound();
-        this.actionSwing();
-        this.actionStop(); 
     },
 });

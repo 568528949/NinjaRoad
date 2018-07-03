@@ -30,22 +30,20 @@ cc.Class({
 
     initInput(){
         this.node.on('mousedown', function (event) {
+            this.beginX = event.getLocation().x;
+            this.beginY = event.getLocation().y;
 
             if(this.playerControl.getJumpInput() == true){
                 this.playerControl.jumpNow(300,800,1);
                 this.playerControl.setJumpInput(false);
             } 
 
-            if(this.playerControl.getReboundInput() == true){
-                this.beginX = event.getLocation().x;
-                this.beginY = event.getLocation().y;
+            if(this.playerControl.getReboundInput() == true){   
                 this.ifBegin = true;
             }
 
             if(this.playerControl.getRopeInput() == true && this.playerControl.jumping == true){
                 this.playerControl.pauseNow();
-                this.beginX = event.getLocation().x;
-                this.beginY = event.getLocation().y;
 
                 this.ropeVar = cc.instantiate(this.ropePrefab);
                 this.controlNode.addChild(this.ropeVar);
@@ -59,6 +57,7 @@ cc.Class({
 
         //鼠标离开和触控离开响应函数
         this.node.on('mouseup', function (event) {
+            //if(this.endX - this.beginX <=5 && this.endx)
 
             if(this.playerControl.getReboundInput() == true){
                 this.playerControl.pauseNow();
@@ -70,14 +69,17 @@ cc.Class({
                 
                 this.ifBegin = false;
             }
-            if(this.playerControl.getRopeInput() == true && this.playerControl.pauseState == "jumping"){
+            if(this.playerControl.getRopeInput() == true && this.playerControl.jumping == true){
                 if(this.ifBegin == false)
                     return;
 
                 this.playerControl.pauseNow();
                 this.ropeVar.getComponent("RopeControl").ropeShow();
 
-                this.ropeVar.getComponent("RopeControl").hanged(this.playerControl.node.x,this.playerControl.node.y,this.angle,this.playerControl.getRopePointLoc());
+                if(this.ropeVar.getComponent("RopeControl").hanged(this.playerControl.node.x,this.playerControl.node.y,this.angle,this.playerControl.getRopePointLoc())){
+                    this.playerControl.swingNow(100,this.angle,3);
+                    //this.ropeVar.getComponent("RopeControl").swing();
+                }
                 
                 this.ifBegin = false;
             }
@@ -87,14 +89,13 @@ cc.Class({
 
         //鼠标移动和触控移动响应函数
         this.node.on('mousemove', function (event) {
+            this.endX = event.getLocation().x;
+            this.endY = event.getLocation().y;
 
             if(this.playerControl.getReboundInput() == true){
 
                 if(this.ifBegin == false) 
                     return;
-
-                this.endX = event.getLocation().x;
-                this.endY = event.getLocation().y;
     
                 this.angle = 90 - Math.atan((this.endY - this.beginY)/(this.endX - this.beginX)) * 180 /Math.PI;
     
@@ -104,13 +105,10 @@ cc.Class({
                     this.angle = 90;
             }
 
-            if(this.playerControl.getRopeInput() == true && this.playerControl.pauseState == "jumping"){
+            if(this.playerControl.getRopeInput() == true && this.playerControl.jumping == true){
 
                 if(this.ifBegin == false) 
                     return;
-
-                this.endX = event.getLocation().x;
-                this.endY = event.getLocation().y;
     
                 this.angle = 90 - Math.atan((this.endY - this.beginY)/(this.endX - this.beginX)) * 180 /Math.PI;
     
@@ -147,6 +145,7 @@ cc.Class({
         this.endX = 0;
         this.endY = 0;
         this.ifBegin = false;
+        this.angle = 0;
 
         this.initInput();
     },
