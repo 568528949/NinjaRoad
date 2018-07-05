@@ -34,15 +34,11 @@ cc.Class({
     onLoad () {
         var r = 200;
         var interval = 0.01;
-        var angle = 90;
+        var angle = 45;
         var MyMath = cc.find("Canvas/ConfigLayer").getComponent("MyMath");
-        var nodeList = MyMath.bezierMovePreCircle(r,cc.v2(this.node.x,this.node.y),angle,4);
-        var count = 0
-
-        this.schedule(function() {
-            count ++;
-            this.node.runAction(cc.moveTo(0.05,nodeList[count]));
-        }, interval, angle);
+        
+        var MyAction = cc.find("Canvas/ConfigLayer").getComponent("MyAction");
+        var actionVar = MyAction.actionCircleMove(this,r,angle,4,0.05,3.75);
     },
 
     start () {

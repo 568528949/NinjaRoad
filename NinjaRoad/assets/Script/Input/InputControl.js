@@ -28,9 +28,9 @@ cc.Class({
         }
     },
 
-    initInput(){
-        this.node.on('mousedown', function (event) {
-            this.beginX = event.getLocation().x;
+
+    mouseAndTouchDown:function(event){
+        this.beginX = event.getLocation().x;
             this.beginY = event.getLocation().y;
 
             if(this.playerControl.getJumpInput() == true){
@@ -52,76 +52,83 @@ cc.Class({
 
                 this.ifBegin = true;
             }
+    },
 
-        }, this);
+    mouseAndTouchMove:function(event){
+        this.endX = event.getLocation().x;
+        this.endY = event.getLocation().y;
 
-        //鼠标离开和触控离开响应函数
-        this.node.on('mouseup', function (event) {
-            //if(this.endX - this.beginX <=5 && this.endx)
+        if(this.playerControl.getReboundInput() == true){
 
-            if(this.playerControl.getReboundInput() == true){
-                this.playerControl.pauseNow();
-                var reboundSpeedX,reboundSpeedY;
-                var speed = 1200;
-                reboundSpeedX = speed * Math.sin(this.angle/180*(Math.PI));
-                reboundSpeedY = speed * Math.cos(this.angle/180*(Math.PI));
-                this.playerControl.reboundNow(reboundSpeedX,reboundSpeedY);
+            if(this.ifBegin == false) 
+                return;
+
+            this.angle = 90 - Math.atan((this.endY - this.beginY)/(this.endX - this.beginX)) * 180 /Math.PI;
+
+            if(this.angle > 90 && this.endX >= this.beginX)
+                this.angle = 0;
+            else if(this.angle > 90 && this.endX < this.beginX)
+                this.angle = 90;
+        }
+
+        if(this.playerControl.getRopeInput() == true && this.playerControl.jumping == true){
+
+            if(this.ifBegin == false) 
+                return;
+
+            this.angle = 90 - Math.atan((this.endY - this.beginY)/(this.endX - this.beginX)) * 180 /Math.PI;
+
+            if(this.angle > 90 && this.endX >= this.beginX)
+                this.angle = 90;
+            else if(this.angle > 90 && this.endX < this.beginX)
+                this.angle = 0;
+
+            var rotateAction = cc.rotateTo(0,this.angle);
+            this.ropeVar.runAction(rotateAction);
+        }
+    },
+
+    mouseAndTouchUp:function(){
+        //if(this.endX - this.beginX <=5 && this.endx)
+
+        if(this.playerControl.getReboundInput() == true){
+            this.playerControl.pauseNow();
+            var reboundSpeedX,reboundSpeedY;
+            var speed = 1200;
+            reboundSpeedX = speed * Math.sin(this.angle/180*(Math.PI));
+            reboundSpeedY = speed * Math.cos(this.angle/180*(Math.PI));
+            this.playerControl.reboundNow(reboundSpeedX,reboundSpeedY);
+            
+            this.ifBegin = false;
+        }
+        if(this.playerControl.getRopeInput() == true && this.playerControl.jumping == true){
+            if(this.ifBegin == false)
+                return;
+
+            this.playerControl.pauseNow();
+            this.ropeVar.getComponent("RopeControl").ropeShow();
+
+            this.playerControl.swingNow(300,45,4,0.04,2.75);
+            if(this.ropeVar.getComponent("RopeControl").hanged(this.playerControl.node.x,this.playerControl.node.y,this.angle,this.playerControl.getRopePointLoc())){
                 
-                this.ifBegin = false;
-            }
-            if(this.playerControl.getRopeInput() == true && this.playerControl.jumping == true){
-                if(this.ifBegin == false)
-                    return;
-
-                this.playerControl.pauseNow();
-                this.ropeVar.getComponent("RopeControl").ropeShow();
-
-                if(this.ropeVar.getComponent("RopeControl").hanged(this.playerControl.node.x,this.playerControl.node.y,this.angle,this.playerControl.getRopePointLoc())){
-                    this.playerControl.swingNow(100,this.angle,3);
-                    //this.ropeVar.getComponent("RopeControl").swing();
-                }
-                
-                this.ifBegin = false;
-            }
-
-        }, this);
-
-
-        //鼠标移动和触控移动响应函数
-        this.node.on('mousemove', function (event) {
-            this.endX = event.getLocation().x;
-            this.endY = event.getLocation().y;
-
-            if(this.playerControl.getReboundInput() == true){
-
-                if(this.ifBegin == false) 
-                    return;
-    
-                this.angle = 90 - Math.atan((this.endY - this.beginY)/(this.endX - this.beginX)) * 180 /Math.PI;
-    
-                if(this.angle > 90 && this.endX >= this.beginX)
-                    this.angle = 0;
-                else if(this.angle > 90 && this.endX < this.beginX)
-                    this.angle = 90;
-            }
-
-            if(this.playerControl.getRopeInput() == true && this.playerControl.jumping == true){
-
-                if(this.ifBegin == false) 
-                    return;
-    
-                this.angle = 90 - Math.atan((this.endY - this.beginY)/(this.endX - this.beginX)) * 180 /Math.PI;
-    
-                if(this.angle > 90 && this.endX >= this.beginX)
-                    this.angle = 90;
-                else if(this.angle > 90 && this.endX < this.beginX)
-                    this.angle = 0;
-
-                var rotateAction = cc.rotateTo(0,this.angle);
-                this.ropeVar.runAction(rotateAction);
+                //this.ropeVar.getComponent("RopeControl").swing();
             }
             
-        }, this);
+            this.ifBegin = false;
+        }
+    },
+
+    initInput(){
+        
+        //鼠标离开和触控摁下响应函数
+        this.node.on('mousedown', this.mouseAndTouchDown, this);
+        //this.node.on('touchstart', this.mouseAndTouchDown, this);
+        //鼠标离开和触控离开响应函数
+        this.node.on('mouseup', this.mouseAndTouchUp,this);
+        //this.node.on('touchmove', this.mouseAndTouchUp,this);
+        //鼠标移动和触控移动响应函数
+        this.node.on('mousemove', this.mouseAndTouchMove, this);
+        //this.node.on('touchend', this.mouseAndTouchMove, this);
 
 
         //摁键响应函数，用于测试

@@ -102,16 +102,18 @@ cc.Class({
         return this.ropePointLoc;
     },
 
-    swingNow(swingR,swingAngle,swingDev){
+    swingNow(swingR,swingAngle,swingDev,swingSpeed,swingRepeat){
         if(this.jumping == true || this.pauseing == true && this.stoping == false){
             this.swingR = swingR;
             this.swingAngle = swingAngle;
             this.swingDev = swingDev;
+            this.swingSpeed = swingSpeed;
+            this.swingRepeat = swingRepeat;
 
             var MyAction = cc.find("Canvas/ConfigLayer").getComponent("MyAction");
             this.getComponent(cc.RigidBody).linearVelocity = cc.v2(0,0);
             this.getComponent(cc.RigidBody).gravityScale = 0;
-            MyAction.actionCircleMovePre(this.node,this.swingR,this.swingAngle,this.swingDev);
+            MyAction.actionCircleMove(this,this.swingR,this.swingAngle,this.swingDev,this.swingSpeed,this.swingRepeat);
 
             this.changeActionState("swinging");
         }

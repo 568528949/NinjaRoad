@@ -29,18 +29,35 @@ cc.Class({
         // },
     },
 
-    actionCircleMovePre(node,r,angle,dev){
-        var interval = 0.01;
-        var innerInterval = 0.05;
-
+    actionCircleMove(context,r,angle,dev,interval,repeat){
+        var maxAngle = 45;
         var MyMath = cc.find("Canvas/ConfigLayer").getComponent("MyMath");
-        var nodeList = MyMath.bezierMovePreCircle(r,cc.v2(node.x,node.y),angle,dev);
-        var count = 0
+        var nodeList1 = MyMath.movePreCircleDown(r,cc.v2(context.node.x,context.node.y),angle,dev);
+        var nodeList2 = MyMath.movePostCircleUp(r,cc.v2(nodeList1[nodeList1.length-1].x,nodeList1[nodeList1.length-1].y),maxAngle,dev);
+        var nodeList3 = MyMath.movePostCircleDown(r,cc.v2(nodeList2[nodeList2.length-1].x,nodeList2[nodeList2.length-1].y),maxAngle,dev);
+        var nodeList4 = MyMath.movePreCircleUp(r,cc.v2(nodeList3[nodeList3.length-1].x,nodeList3[nodeList3.length-1].y),maxAngle,dev);
 
-        this.schedule(function() {
+        var nodeList = [];
+        for(var i = 0;i< nodeList1.length;i++)
+            nodeList[i] = nodeList1[i];
+        for(i = 0;i<nodeList2.length-1;i++)
+            nodeList[nodeList1.length+i] = nodeList2[i+1];
+        for(i = 0;i<nodeList3.length-1;i++)
+            nodeList[nodeList1.length+nodeList2.length-1+i] = nodeList3[i+1];
+        for(i = 0;i<nodeList4.length-1;i++)
+            nodeList[nodeList1.length+nodeList2.length+nodeList3.length-2+i] = nodeList4[i+1];
+
+        var delay = 0;
+
+        var count = 1;
+    
+        context.schedule(function() {
+            context.node.runAction(cc.moveTo(interval,nodeList[count]));
             count ++;
-            node.runAction(cc.moveTo(innerInterval,nodeList[count]));
-        }, interval, angle);
+            if(count >=nodeList.length)
+                count = 1;
+        }, interval, (nodeList.length-count)*repeat,delay);
+
     },
 
     // LIFE-CYCLE CALLBACKS:
