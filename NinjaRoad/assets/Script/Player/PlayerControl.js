@@ -95,26 +95,43 @@ cc.Class({
 
 
     //绳索状态相关
+    setRopePoint(ropePoint){
+        this.ropePoint = ropePoint;
+    },
     setRopePointLoc(ropePointX,ropePointY){
         this.ropePointLoc = cc.v2(ropePointX,ropePointY);
     },
     getRopePointLoc(){
         return this.ropePointLoc;
     },
+    addRope(rope){
+        this.rope = rope;
+        this.ropePoint.addChild(rope);
+    },
 
-    swingNow(swingR,swingAngle,swingDev,swingSpeed,swingRepeat){
+    swingNow(rope,maxAngle,swingSpeed,swingRepeat){
         if(this.jumping == true || this.pauseing == true && this.stoping == false){
-            this.swingR = swingR;
-            this.swingAngle = swingAngle;
-            this.swingDev = swingDev;
+            this.rope = rope;
+            this.swingR = cc.pDistance(cc.v2(this.node.x,this.node.y),this.ropePointLoc);
+            this.swingAngle = Math.atan(Math.abs(this.node.x-this.ropePointLoc.x)/Math.abs(this.node.y-this.ropePointLoc.y))/Math.PI*180;
+            this.maxAngle = maxAngle;
             this.swingSpeed = swingSpeed;
             this.swingRepeat = swingRepeat;
 
             var MyAction = cc.find("Canvas/ConfigLayer").getComponent("MyAction");
             this.getComponent(cc.RigidBody).linearVelocity = cc.v2(0,0);
-            this.getComponent(cc.RigidBody).gravityScale = 0;
-            MyAction.actionCircleMove(this,this.swingR,this.swingAngle,this.swingDev,this.swingSpeed,this.swingRepeat);
+            //this.getComponent(cc.RigidBody).gravityScale = 0;
 
+            this.rope.getComponent(cc.DistanceJoint).connectedBody = this.node.getComponent(cc.RigidBody);
+            this.rope.getComponent(cc.DistanceJoint).anchor = cc.v2(0,-this.swingR);
+            this.rope.getComponent(cc.DistanceJoint).apply();
+
+            this.rope.getComponent("RopeControl").swing(this.swingAngle,this.maxAngle,this.swingSpeed,this.swingRepeat);
+
+            //this.node.parent = cc.find("Canvas/PlayerLayer")
+            //MyAction.actionCircleMove(this,this.swingR,this.swingAngle,this.swingDev,this.swingSpeed,this.swingRepeat);
+            //this.rope.getComponent("RopeControl").swing(this.swingR,this.swingAngle,this.swingDev,this.swingSpeed,this.swingRepeat);
+            
             this.changeActionState("swinging");
         }
     },

@@ -45,10 +45,10 @@ cc.Class({
             if(this.playerControl.getRopeInput() == true && this.playerControl.jumping == true){
                 this.playerControl.pauseNow();
 
-                this.ropeVar = cc.instantiate(this.ropePrefab);
-                this.controlNode.addChild(this.ropeVar);
+                this.rope = cc.instantiate(this.ropePrefab);
+                this.playerControl.addRope(this.rope);
 
-                this.ropeVar.getComponent("RopeControl").ropeHide();
+                this.rope.getComponent("RopeControl").ropeHide();
 
                 this.ifBegin = true;
             }
@@ -83,8 +83,7 @@ cc.Class({
             else if(this.angle > 90 && this.endX < this.beginX)
                 this.angle = 0;
 
-            var rotateAction = cc.rotateTo(0,this.angle);
-            this.ropeVar.runAction(rotateAction);
+            //this.rope.runAction(rotateAction);
         }
     },
 
@@ -106,12 +105,14 @@ cc.Class({
                 return;
 
             this.playerControl.pauseNow();
-            this.ropeVar.getComponent("RopeControl").ropeShow();
+            this.rope.getComponent("RopeControl").ropeShow();
 
-            this.playerControl.swingNow(300,45,4,0.04,2.75);
-            if(this.ropeVar.getComponent("RopeControl").hanged(this.playerControl.node.x,this.playerControl.node.y,this.angle,this.playerControl.getRopePointLoc())){
-                
-                //this.ropeVar.getComponent("RopeControl").swing();
+            
+            if(this.rope.getComponent("RopeControl").hanged(this.playerControl.node.x,this.playerControl.node.y,this.angle,this.playerControl.getRopePointLoc())){
+                var maxAngle = 55;
+                var swingSpeed = 0.6;
+                var swingRepeat = 3;
+                this.playerControl.swingNow(this.rope,maxAngle,swingSpeed,swingRepeat);
             }
             
             this.ifBegin = false;
@@ -121,14 +122,14 @@ cc.Class({
     initInput(){
         
         //鼠标离开和触控摁下响应函数
-        this.node.on('mousedown', this.mouseAndTouchDown, this);
-        //this.node.on('touchstart', this.mouseAndTouchDown, this);
+        //this.node.on('mousedown', this.mouseAndTouchDown, this);
+        this.node.on('touchstart', this.mouseAndTouchDown, this);
         //鼠标离开和触控离开响应函数
-        this.node.on('mouseup', this.mouseAndTouchUp,this);
-        //this.node.on('touchmove', this.mouseAndTouchUp,this);
+        //this.node.on('mouseup', this.mouseAndTouchUp,this);
+        this.node.on('touchend', this.mouseAndTouchUp,this);
         //鼠标移动和触控移动响应函数
-        this.node.on('mousemove', this.mouseAndTouchMove, this);
-        //this.node.on('touchend', this.mouseAndTouchMove, this);
+        //this.node.on('mousemove', this.mouseAndTouchMove, this);
+        this.node.on('touchmove', this.mouseAndTouchMove, this);
 
 
         //摁键响应函数，用于测试

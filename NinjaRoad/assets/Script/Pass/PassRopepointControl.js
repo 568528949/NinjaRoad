@@ -18,6 +18,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
     onBeginContact(contact, self, other) {
         other.getComponent("PlayerControl").setRopeInput(true);
+        other.getComponent("PlayerControl").setRopePoint(this.node);
         other.getComponent("PlayerControl").setRopePointLoc(this.node.x,this.node.y);
     },
 

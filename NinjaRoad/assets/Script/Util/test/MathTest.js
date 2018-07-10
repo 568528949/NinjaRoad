@@ -32,13 +32,17 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+        /*
         var r = 200;
         var interval = 0.01;
         var angle = 45;
         var MyMath = cc.find("Canvas/ConfigLayer").getComponent("MyMath");
         
         var MyAction = cc.find("Canvas/ConfigLayer").getComponent("MyAction");
-        var actionVar = MyAction.actionCircleMove(this,r,angle,4,0.05,3.75);
+        var actionVar = MyAction.actionCircleMove(this,r,angle,4,0.05,4);
+        */
+        var action = cc.rotateBy(2,100);
+        this.node.runAction(action);
     },
 
     start () {

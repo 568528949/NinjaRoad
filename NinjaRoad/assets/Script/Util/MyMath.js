@@ -29,76 +29,30 @@ cc.Class({
         // },
     },
 
-    movePreCircleDown(r,loc,angle,dev){
-        var nodeListVar = [];
-        var index = 0;
-        for(var i=0;i<= angle;){
-            var intevalX = Math.abs(r*Math.sin(angle/180*Math.PI) - r*Math.sin((angle-i)/180*Math.PI));
-            var intevalY = Math.abs(r*Math.cos(angle/180*Math.PI) - r*Math.cos((angle-i)/180*Math.PI));
-            nodeListVar[index] = cc.v2(loc.x + intevalX , loc.y - intevalY);  
-            index ++;
-            if(i == angle)
-                break;
-             
-            i=i+dev;
-            if(i > angle)
-                i = angle;
-        }
-        return nodeListVar;
-    },
+    listMerge(list1,list2,tag){
+        var list = [];
 
-    movePreCircleUp(r,loc,angle,dev){
-        var nodeListVar = [];
-        var index = 0;
-        for(var i=0;i<= angle;){
-            var intevalX = Math.abs(r*Math.sin(0/180*Math.PI) - r*Math.sin(i/180*Math.PI));
-            var intevalY = Math.abs(r*Math.cos(0/180*Math.PI) - r*Math.cos(i/180*Math.PI));
-            nodeListVar[index] = cc.v2(loc.x - intevalX , loc.y + intevalY);  
-            index ++;
-            if(i == angle)
-                break;
-             
-            i=i+dev;
-            if(i > angle)
-                i = angle;
+        if(tag == false)
+        {
+            for(var i=0;i<list1.length;i++){
+                list[i] = list1[i];
+            }
+    
+            for(i=0;i<list2.length;i++){
+                list[i+list1.length] = list2[i];
+            }
         }
-        return nodeListVar;
-    },
+        else{
+            for(var i=0;i<list1.length;i++){
+                list[i] = list1[i];
+            }
+    
+            for(i=1;i<list2.length;i++){
+                list[i+list1.length-1] = list2[i];
+            }
+        }
 
-    movePostCircleDown(r,loc,angle,dev){
-        var nodeListVar = [];
-        var index = 0;
-        for(var i=0;i<= angle;){
-            var intevalX = Math.abs(r*Math.sin(angle/180*Math.PI) - r*Math.sin((angle-i)/180*Math.PI));
-            var intevalY = Math.abs(r*Math.cos(angle/180*Math.PI) - r*Math.cos((angle-i)/180*Math.PI));
-            nodeListVar[index] = cc.v2(loc.x - intevalX , loc.y - intevalY);  
-            index ++;
-            if(i == angle)
-                break;
-             
-            i=i+dev;
-            if(i > angle)
-                i = angle;
-        }
-        return nodeListVar;
-    },
-
-    movePostCircleUp(r,loc,angle,dev){
-        var nodeListVar = [];
-        var index = 0;
-        for(var i=0;i<= angle;){
-            var intevalX = Math.abs(r*Math.sin(0/180*Math.PI) - r*Math.sin(i/180*Math.PI));
-            var intevalY = Math.abs(r*Math.cos(0/180*Math.PI) - r*Math.cos(i/180*Math.PI));
-            nodeListVar[index] = cc.v2(loc.x + intevalX , loc.y + intevalY);  
-            index ++;
-            if(i == angle)
-                break;
-             
-            i=i+dev;
-            if(i > angle)
-                i = angle;
-        }
-        return nodeListVar;
+        return list;
     },
 
     // LIFE-CYCLE CALLBACKS:

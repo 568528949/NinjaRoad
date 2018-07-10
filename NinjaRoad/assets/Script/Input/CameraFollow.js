@@ -19,10 +19,12 @@ cc.Class({
     },
 
     setCameraNodeLocation(){
-        if(this.node.x <= this.canvasWidth/2)
+        var realx = this.node.x;
+
+        if(realx <= this.canvasWidth/2)
             this.cameraNode.x = 0;
         else
-            this.cameraNode.x = this.node.x - this.canvasWidth/2;
+            this.cameraNode.x = realx - this.canvasWidth/2;
     },
 
     // LIFE-CYCLE CALLBACKS:

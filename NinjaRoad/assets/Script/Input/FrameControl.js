@@ -29,8 +29,18 @@ cc.Class({
         // },
     },
 
-
     // LIFE-CYCLE CALLBACKS:
+    rotateNow(){
+        this.ifRotate = true;
+    },
+
+    rotate(){
+        if(this.ifRotate == true){
+            this.ifRotate= false;
+            this.node.runAction(cc.rotateBy(3,180));
+        }
+    },
+
 
     // onLoad () {},
 
@@ -38,5 +48,7 @@ cc.Class({
 
     },
 
-    // update (dt) {},
+    update (dt) {
+        this.rotate();
+    },
 });
