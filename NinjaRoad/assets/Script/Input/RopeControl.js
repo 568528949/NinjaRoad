@@ -23,19 +23,16 @@ cc.Class({
         this.node.opacity = 0;
     },
 
-    hanged(beginX,beginY,angle,ropePointLoc){
-        this.beginX = beginX;
-        this.beginY = beginY;
+    hanged(swingR,limitR,swingAngle){
 
-        this.angle = 90-Math.atan((ropePointLoc.y - this.beginY)/(ropePointLoc.x - this.beginX)) * 180 /Math.PI;
-        this.r = cc.pDistance(cc.v2(beginX,beginY),ropePointLoc);
-
-        if(true){
-            this.node.rotation = this.angle;
-            this.node.height = this.r;
+        if(swingR < limitR){
+            this.node.rotation = swingAngle;
+            this.node.height = swingR;
             this.node.getComponent(cc.DistanceJoint);
             return true;
         }      
+        else
+            return false;   
     },
 
     swing(swingAngle,maxAngel,swingSpeed,swingRepeat){

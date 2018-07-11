@@ -12,7 +12,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        
+        limitR:300,
     },
 
     // LIFE-CYCLE CALLBACKS:

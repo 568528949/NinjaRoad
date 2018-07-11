@@ -31,27 +31,30 @@ cc.Class({
 
     mouseAndTouchDown:function(event){
         this.beginX = event.getLocation().x;
-            this.beginY = event.getLocation().y;
+        this.beginY = event.getLocation().y;
 
-            if(this.playerControl.getJumpInput() == true){
-                this.playerControl.jumpNow(300,800,1);
-                this.playerControl.setJumpInput(false);
-            } 
+        if(this.playerControl.getJumpInput() == true){
+            this.playerControl.jumpNow(300,800,1);
+            this.playerControl.setJumpInput(false);
+        } 
 
-            if(this.playerControl.getReboundInput() == true){   
-                this.ifBegin = true;
-            }
+        if(this.playerControl.getReboundInput() == true){   
+            this.ifBegin = true;
+        }
 
-            if(this.playerControl.getRopeInput() == true && this.playerControl.jumping == true){
-                this.playerControl.pauseNow();
+        if(this.playerControl.getRopeInput() == true && this.playerControl.jumping == true){
+            //this.playerControl.pauseNow();
 
-                this.rope = cc.instantiate(this.ropePrefab);
-                this.playerControl.addRope(this.rope);
+            this.rope = cc.instantiate(this.ropePrefab);
+            this.playerControl.addRope(this.rope);
 
-                this.rope.getComponent("RopeControl").ropeHide();
+            this.rope.getComponent("RopeControl").ropeHide();
 
-                this.ifBegin = true;
-            }
+            this.ifBegin = true;
+        }
+        if(this.playerControl.swinging == true){
+            this.playerControl.swingStop();
+        }
     },
 
     mouseAndTouchMove:function(event){
@@ -104,11 +107,10 @@ cc.Class({
             if(this.ifBegin == false)
                 return;
 
-            this.playerControl.pauseNow();
+            //this.playerControl.pauseNow();
             this.rope.getComponent("RopeControl").ropeShow();
-
             
-            if(this.rope.getComponent("RopeControl").hanged(this.playerControl.node.x,this.playerControl.node.y,this.angle,this.playerControl.getRopePointLoc())){
+            if(true){
                 var maxAngle = 55;
                 var swingSpeed = 0.6;
                 var swingRepeat = 3;

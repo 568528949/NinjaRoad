@@ -111,29 +111,36 @@ cc.Class({
 
     swingNow(rope,maxAngle,swingSpeed,swingRepeat){
         if(this.jumping == true || this.pauseing == true && this.stoping == false){
+
             this.rope = rope;
             this.swingR = cc.pDistance(cc.v2(this.node.x,this.node.y),this.ropePointLoc);
             this.swingAngle = Math.atan(Math.abs(this.node.x-this.ropePointLoc.x)/Math.abs(this.node.y-this.ropePointLoc.y))/Math.PI*180;
             this.maxAngle = maxAngle;
             this.swingSpeed = swingSpeed;
             this.swingRepeat = swingRepeat;
-
-            var MyAction = cc.find("Canvas/ConfigLayer").getComponent("MyAction");
             this.getComponent(cc.RigidBody).linearVelocity = cc.v2(0,0);
-            //this.getComponent(cc.RigidBody).gravityScale = 0;
+            this.limitR = this.ropePoint.getComponent("PassRopepointControl").limitR;
+
+            if(this.rope.getComponent("RopeControl").hanged(this.swingR,this.limitR,this.swingAngle) == false)
+                return;
+
+            this.setRopeInput(false);
+            this.ropePoint.getComponent(cc.RigidBody).enabledContactListener = false;
 
             this.rope.getComponent(cc.DistanceJoint).connectedBody = this.node.getComponent(cc.RigidBody);
             this.rope.getComponent(cc.DistanceJoint).anchor = cc.v2(0,-this.swingR);
             this.rope.getComponent(cc.DistanceJoint).apply();
 
             this.rope.getComponent("RopeControl").swing(this.swingAngle,this.maxAngle,this.swingSpeed,this.swingRepeat);
-
-            //this.node.parent = cc.find("Canvas/PlayerLayer")
-            //MyAction.actionCircleMove(this,this.swingR,this.swingAngle,this.swingDev,this.swingSpeed,this.swingRepeat);
-            //this.rope.getComponent("RopeControl").swing(this.swingR,this.swingAngle,this.swingDev,this.swingSpeed,this.swingRepeat);
-            
             this.changeActionState("swinging");
         }
+    },
+
+    swingStop(){
+        this.rope.destroy();
+        this.getComponent(cc.RigidBody).linearVelocity = cc.v2(300,800);
+        this.changeActionState("jumping");
+        this.setJumpInput(false);
     },
 
     //暂停和继续状态相关
@@ -175,7 +182,7 @@ cc.Class({
         this.jumping = false;
         this.runing = false;
         this.rebounding = false;
-        this.swing = false;
+        this.swinging = false;
         this.stoping = false;
 
         if(state == "standing")
