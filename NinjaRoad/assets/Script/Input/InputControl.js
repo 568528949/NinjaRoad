@@ -25,100 +25,120 @@ cc.Class({
         ropePrefab:{
             default : null,
             type : cc.Prefab
-        }
+        },
+
+        jumpSpeedX : 300,
+        jumpSpeedY : 800,
+
+        reboundSpeedTotal : 1200,
+
+        ropeMaxAngle : 55,
+        ropeSwingSpeed : 0.6,
+        ropeSwingRepeat : 3,
+        ropeStopJumpSpeedX : 300,
+        ropeStopJumpSpeedY : 800,
     },
 
 
     mouseAndTouchDown:function(event){
+        if(this.ifBegin == true)
+            return;
+
         this.beginX = event.getLocation().x;
         this.beginY = event.getLocation().y;
 
         if(this.playerControl.getJumpInput() == true){
-            this.playerControl.jumpNow(300,800,1);
+            this.playerControl.jumpNow(this.jumpSpeedX,this.jumpSpeedY,1);
             this.playerControl.setJumpInput(false);
+
+            this.ifBegin == true
+            return;
         } 
 
-        if(this.playerControl.getReboundInput() == true){   
+        if(this.playerControl.getReboundInput() == true){  
+
             this.ifBegin = true;
+            return;
         }
 
         if(this.playerControl.getRopeInput() == true && this.playerControl.jumping == true){
-            //this.playerControl.pauseNow();
-
             this.rope = cc.instantiate(this.ropePrefab);
             this.playerControl.addRope(this.rope);
 
-            this.rope.getComponent("RopeControl").ropeHide();
+            if(true){
+                var maxAngle = this.ropeMaxAngle;
+                var swingSpeed = this.ropeSwingSpeed;
+                var swingRepeat = this.ropeSwingRepeat;
+                this.playerControl.swingNow(this.rope,maxAngle,swingSpeed,swingRepeat);
+            }
 
             this.ifBegin = true;
+            return;
         }
+        
         if(this.playerControl.swinging == true){
-            this.playerControl.swingStop();
+            var jumpSpeedX = this.ropeStopJumpSpeedX;
+            var jumpSpeedY = this.ropeStopJumpSpeedY;
+            this.playerControl.swingStop(jumpSpeedX,jumpSpeedY);
+
+            this.ifBegin = true;
+            return;
         }
+
+        this.ifBegin = true;
+            return;
     },
 
     mouseAndTouchMove:function(event){
+        if(this.ifBegin == false) 
+            return;
+
         this.endX = event.getLocation().x;
         this.endY = event.getLocation().y;
 
         if(this.playerControl.getReboundInput() == true){
 
-            if(this.ifBegin == false) 
-                return;
+            this.angle = 90 - Math.atan((this.endY - this.controlNode.y)/(this.endX - this.controlNode.x)) * 180 /Math.PI;
 
-            this.angle = 90 - Math.atan((this.endY - this.beginY)/(this.endX - this.beginX)) * 180 /Math.PI;
-
-            if(this.angle > 90 && this.endX >= this.beginX)
+            if(this.angle > 90 && this.endX >= this.controlNode.x)
                 this.angle = 0;
-            else if(this.angle > 90 && this.endX < this.beginX)
+            else if(this.angle > 90 && this.endX < this.controlNode.x)
                 this.angle = 90;
+
+            return;
         }
 
         if(this.playerControl.getRopeInput() == true && this.playerControl.jumping == true){
-
-            if(this.ifBegin == false) 
-                return;
-
-            this.angle = 90 - Math.atan((this.endY - this.beginY)/(this.endX - this.beginX)) * 180 /Math.PI;
-
-            if(this.angle > 90 && this.endX >= this.beginX)
-                this.angle = 90;
-            else if(this.angle > 90 && this.endX < this.beginX)
-                this.angle = 0;
-
-            //this.rope.runAction(rotateAction);
+            return;
         }
     },
 
     mouseAndTouchUp:function(){
         //if(this.endX - this.beginX <=5 && this.endx)
+        if(this.ifBegin == false)
+            return;
 
         if(this.playerControl.getReboundInput() == true){
+
             this.playerControl.pauseNow();
             var reboundSpeedX,reboundSpeedY;
-            var speed = 1200;
+            var speed = this.reboundSpeedTotal;
             reboundSpeedX = speed * Math.sin(this.angle/180*(Math.PI));
             reboundSpeedY = speed * Math.cos(this.angle/180*(Math.PI));
             this.playerControl.reboundNow(reboundSpeedX,reboundSpeedY);
             
             this.ifBegin = false;
+            return;
         }
-        if(this.playerControl.getRopeInput() == true && this.playerControl.jumping == true){
-            if(this.ifBegin == false)
-                return;
 
-            //this.playerControl.pauseNow();
-            this.rope.getComponent("RopeControl").ropeShow();
-            
-            if(true){
-                var maxAngle = 55;
-                var swingSpeed = 0.6;
-                var swingRepeat = 3;
-                this.playerControl.swingNow(this.rope,maxAngle,swingSpeed,swingRepeat);
-            }
+        if(this.playerControl.getRopeInput() == true && this.playerControl.jumping == true){
             
             this.ifBegin = false;
+            return;
         }
+
+        this.ifBegin = false;
+            return;
     },
 
     initInput(){

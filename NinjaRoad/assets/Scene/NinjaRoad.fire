@@ -2149,8 +2149,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 735,
-      "y": 484
+      "x": 176,
+      "y": 446
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -2320,7 +2320,15 @@
     },
     "ropePrefab": {
       "__uuid__": "04d2c5c9-216f-4960-a7a2-a0f3db7f024d"
-    }
+    },
+    "jumpSpeedX": 300,
+    "jumpSpeedY": 800,
+    "reboundSpeedTotal": 1200,
+    "ropeMaxAngle": 55,
+    "ropeSwingSpeed": 0.6,
+    "ropeSwingRepeat": 3,
+    "ropeStopJumpSpeedX": 300,
+    "ropeStopJumpSpeedY": 800
   },
   {
     "__type__": "cc.Camera",

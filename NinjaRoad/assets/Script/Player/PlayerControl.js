@@ -136,9 +136,9 @@ cc.Class({
         }
     },
 
-    swingStop(){
+    swingStop(jumpSpeedX,jumpSpeedY){
         this.rope.destroy();
-        this.getComponent(cc.RigidBody).linearVelocity = cc.v2(300,800);
+        this.getComponent(cc.RigidBody).linearVelocity = cc.v2(jumpSpeedX,jumpSpeedY);
         this.changeActionState("jumping");
         this.setJumpInput(false);
     },
