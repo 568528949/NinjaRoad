@@ -60,7 +60,7 @@ cc.Class({
 
     //跳状态作相关
     jumpNow(jumpSpeedX,jumpSpeedY,jumpType){
-        if((this.runing == true || this.rebounding == true) && this.stoping == false){
+        if((this.runing == true || this.rebounding == true ) && this.stoping == false){
             this.jumpSpeedX = jumpSpeedX;
             this.jumpSpeedY = jumpSpeedY;
             this.jumpType = jumpType;
@@ -143,6 +143,27 @@ cc.Class({
         this.setJumpInput(false);
     },
 
+    //滑梯状态相关
+    slopeNow(slopeSpeed,slopeAngle){
+        if(this.jumping == true && this.stoping == false){
+            this.slopeSpeed = slopeSpeed;
+            this.slopeAngle = slopeAngle;
+
+            this.getComponent(cc.RigidBody).linearVelocity = cc.v2(this.slopeSpeed,0);
+            
+            //this.getComponent(cc.RigidBody).gravityScale = this.getComponent(cc.RigidBody).gravityScale * Math.sin(this.slopeAngle);
+
+            this.changeActionState("slopeing");
+        } 
+    },
+
+    slopeStop(){
+        var speedx = this.getComponent(cc.RigidBody).linearVelocity.x;
+        var speedy = 800;
+        this.getComponent(cc.RigidBody).linearVelocity = cc.v2(speedx*1.5,speedy);
+        this.changeActionState("jumping");
+    },
+
     //暂停和继续状态相关
     pauseNow(){
         if(this.pauseing == false && this.stoping == false){
@@ -183,6 +204,7 @@ cc.Class({
         this.runing = false;
         this.rebounding = false;
         this.swinging = false;
+        this.slopeing = false;
         this.stoping = false;
 
         if(state == "standing")
@@ -195,6 +217,8 @@ cc.Class({
             this.rebounding = true;
         else if(state == "swinging")
             this.swinging = true;
+        else if(state == "slopeing")
+            this.slopeing = true;
         else if(state == "stoping")
             this.stoping = true;
 
@@ -209,6 +233,7 @@ cc.Class({
         this.runing = false;
         this.rebounding = false;
         this.swinging = false;
+        this.slopeing = false;
         this.stoping = false;
 
         this.pauseing = false;

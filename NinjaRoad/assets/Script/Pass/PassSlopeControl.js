@@ -15,21 +15,19 @@ cc.Class({
         
     },
 
-    //平台相关方法
     onBeginContact(contact, self, other) {
-
-        other.getComponent("PlayerControl").runNow(this.runSpeed);
-        other.getComponent("PlayerControl").setJumpInput(true);
+        other.getComponent("PlayerControl").slopeNow(this.slopeSpeed,this.slopeAngle);
     },
 
     onEndContact(contact, self, other){
-        other.getComponent("PlayerControl").jumpNow(0,0,0);
     },
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
         this.ActionConfig = cc.find("Canvas/ConfigLayer").getComponent("ActionConfig");
-        this.runSpeed = this.ActionConfig.runSpeed;
+        this.slopeSpeed = this.ActionConfig.slopeSpeed;
+        this.slopeAngle = this.node.rotation;
     },
 
     start () {

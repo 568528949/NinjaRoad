@@ -26,17 +26,6 @@ cc.Class({
             default : null,
             type : cc.Prefab
         },
-
-        jumpSpeedX : 300,
-        jumpSpeedY : 800,
-
-        reboundSpeedTotal : 1200,
-
-        ropeMaxAngle : 55,
-        ropeSwingSpeed : 0.6,
-        ropeSwingRepeat : 3,
-        ropeStopJumpSpeedX : 300,
-        ropeStopJumpSpeedY : 800,
     },
 
 
@@ -80,6 +69,13 @@ cc.Class({
             var jumpSpeedX = this.ropeStopJumpSpeedX;
             var jumpSpeedY = this.ropeStopJumpSpeedY;
             this.playerControl.swingStop(jumpSpeedX,jumpSpeedY);
+
+            this.ifBegin = true;
+            return;
+        }
+
+        if(this.playerControl.slopeing == true){
+            this.playerControl.slopeStop();
 
             this.ifBegin = true;
             return;
@@ -178,6 +174,23 @@ cc.Class({
         this.angle = 0;
 
         this.initInput();
+
+        this.ActionConfig = cc.find("Canvas/ConfigLayer").getComponent("ActionConfig");
+        
+        this.runSpeed = this.ActionConfig.runSpeed;
+
+        this.jumpSpeedX = this.ActionConfig.jumpSpeedX;
+        this.jumpSpeedY = this.ActionConfig.jumpSpeedY;
+
+        this.reboundSpeedTotal = this.ActionConfig.reboundSpeedTotal;
+
+        this.ropeMaxAngle = this.ActionConfig.ropeMaxAngle;
+        this.ropeSwingSpeed = this.ActionConfig.ropeSwingSpeed;
+        this.ropeSwingRepeat = this.ActionConfig.ropeSwingRepeat;
+        this.ropeStopJumpSpeedX = this.ActionConfig.ropeStopJumpSpeedX;
+        this.ropeStopJumpSpeedY = this.ActionConfig.ropeStopJumpSpeedY;
+
+        this.slopeSpeed = this.ActionConfig.slopeSpeed;
     },
 
     update (dt) {

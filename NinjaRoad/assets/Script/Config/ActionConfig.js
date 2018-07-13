@@ -12,25 +12,25 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        
+        runSpeed : 300,
+
+        jumpSpeedX : 300,
+        jumpSpeedY : 800,
+
+        reboundSpeedTotal : 1200,
+
+        ropeMaxAngle : 55,
+        ropeSwingSpeed : 0.6,
+        ropeSwingRepeat : 3,
+        ropeStopJumpSpeedX : 300,
+        ropeStopJumpSpeedY : 800,
+
+        slopeSpeed : 300,
     },
 
-    //平台相关方法
-    onBeginContact(contact, self, other) {
-
-        other.getComponent("PlayerControl").runNow(this.runSpeed);
-        other.getComponent("PlayerControl").setJumpInput(true);
-    },
-
-    onEndContact(contact, self, other){
-        other.getComponent("PlayerControl").jumpNow(0,0,0);
-    },
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad () {
-        this.ActionConfig = cc.find("Canvas/ConfigLayer").getComponent("ActionConfig");
-        this.runSpeed = this.ActionConfig.runSpeed;
-    },
+    // onLoad () {},
 
     start () {
 
