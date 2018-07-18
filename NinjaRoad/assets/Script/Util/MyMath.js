@@ -29,6 +29,26 @@ cc.Class({
         // },
     },
 
+    random(min,max){
+        var num;
+
+        var randVar = Math.floor(Math.random() * (max-min+1)+min);
+        num = randVar;
+
+        return num;
+    },
+
+    randomList(min,max,num){
+        var numListVar = [];
+
+        for(var i = 0;i< num;i++){
+            var randVar = Math.floor(Math.random() * (max-min+1)+min);
+            numListVar[i] = randVar;
+        }
+
+        return numListVar;
+    },
+
     listMerge(list1,list2,tag){
         var list = [];
 
