@@ -25,6 +25,10 @@ cc.Class({
         },
         platformLength : 0,
         platformY : 0,
+        
+        maxAngle:0,
+        limitR:0,
+        ropeY:0,
     },
 
     // LIFE-CYCLE CALLBACKS:

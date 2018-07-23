@@ -36,7 +36,10 @@ cc.Class({
         this.passSequence[0] = "P000";
         for(var i=1;i<sequenceNum;i++){
             var nextPassPossible = this.passLimitMap.get(this.passSequence[i-1]);
-            this.passSequence[i] = nextPassPossible[this.MyMath.random(0,nextPassPossible.length-1)];
+            var nextPassWeight = this.passLimitWightMapAll.get(this.passSequence[i-1]);
+            //var nextPassIndex = this.MyMath.randomByWeight(0,nextPassPossible.length-1,nextPassWeight);
+            var nextPassIndex = this.MyMath.random(0,nextPassPossible.length-1);
+            this.passSequence[i] = nextPassPossible[nextPassIndex];
         }
         //this.passSequence = ["P000","P021","P021","P023","P012"];
     },
@@ -61,6 +64,8 @@ cc.Class({
 
     onLoad () {
         this.MyMath = cc.find("Canvas/ConfigLayer").getComponent("MyMath");
+        this.passObject = cc.find("Canvas/JsonLayer").getComponent("JsonPassLimit").json;
+
         this.initPassLimit();
         this.initPassNameMap();
         this.initPassSequence();
@@ -77,30 +82,25 @@ cc.Class({
         this.passLimitMap = new Map();
         
         //设置pass连接关系限制
-        //platform的
-        this.passLimitMap.set("P000",
-        ["P000","P001","P002","P010","P011","P012","P020","P021","P022"]);
-        this.passLimitMap.set("P001",
-        ["P000","P001","P002","P003","P010","P011","P012","P013","P020","P021","P022","P023"]);
-        this.passLimitMap.set("P002",
-        ["P000","P001","P002","P003","P010","P011","P012","P013","P020","P021","P022","P023"]);
-        this.passLimitMap.set("P003",
-        ["P000","P001","P002","P003","P010","P011","P012","P013","P020","P021","P022","P023"]);
-        this.passLimitMap.set("P010",
-        ["P000","P001","P010","P011","P020","P021"]);
-        this.passLimitMap.set("P011",
-        ["P000","P001","P002","P010","P011","P012","P020","P021","P022"]);
-        this.passLimitMap.set("P012",
-        ["P000","P001","P002","P003","P010","P011","P012","P013","P020","P021","P022","P023"]);
-        this.passLimitMap.set("P013",
-        ["P000","P001","P002","P003","P010","P011","P012","P013","P020","P021","P022","P023"]);
-        this.passLimitMap.set("P020",
-        ["P000","P010","P020"]);
-        this.passLimitMap.set("P021",
-        ["P000","P001","P010","P011","P020","P021"]);
-        this.passLimitMap.set("P022",
-        ["P000","P001","P002","P010","P011","P012","P020","P021","P022"]);
-        this.passLimitMap.set("P023",
-        ["P000","P001","P002","P003","P010","P011","P012","P013","P020","P021","P022","P023"]);
+        for(var i = 0;i<this.passObject.passLimit.length;i++){
+            var key = this.passObject.passLimit[i].key;
+            var value = [];
+            for(var j = 0;j<this.passObject.passLimit[i].value.length;j++){
+                value[j] = this.passObject.passLimit[i].value[j].nextPass;
+            }
+            this.passLimitMap.set(key,value);
+        }
+
+        //设置pass连接关系的权值
+        this.passLimitWightMapAll = new Map();
+        for(var i = 0;i<this.passLimitMap.size;i++){
+            var key = this.passObject.passLimit[i].key;
+            var value = [];
+            for(var j = 0;j<this.passObject.passLimit[i].value.length;j++){
+                value[j] = this.passObject.passLimit[i].value[j].nextWeight;
+            }
+            this.passLimitWightMapAll.set(key,value);
+        }
     },
+
 });

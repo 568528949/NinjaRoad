@@ -13,13 +13,14 @@ cc.Class({
 
     properties: {
         limitR:300,
+        maxAngle:45,
     },
 
     // LIFE-CYCLE CALLBACKS:
     onBeginContact(contact, self, other) {
         other.getComponent("PlayerControl").setRopeInput(true);
         other.getComponent("PlayerControl").setRopePoint(this.node);
-        other.getComponent("PlayerControl").setRopePointLoc(this.node.x,this.node.y);
+        other.getComponent("PlayerControl").setRopePointLoc(this.node.x,this.node.y,this.maxAngle,this.limitR);
     },
 
     onLoad () {

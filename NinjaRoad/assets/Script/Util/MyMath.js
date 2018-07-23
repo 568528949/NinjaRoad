@@ -38,6 +38,28 @@ cc.Class({
         return num;
     },
 
+    randomByWeight(min,max,weightList){
+        var interval = max - min + 1;
+        if(interval != weightList.length)
+            return;
+
+        var allWeight = 0;
+        for(var i=0;i<weightList.length;i++){
+            allWeight +=weightList[i];
+        }
+        
+        var randomVar = Math.random() * allWeight;
+        var weightSope = 0;
+        for(var i=0;i<weightList.length;i++){
+            weightSope += weightList[i];
+           
+            if(randomVar < weightSope)
+                return min+i;
+            
+        }
+        return max;
+    },
+
     randomList(min,max,num){
         var numListVar = [];
 

@@ -98,8 +98,10 @@ cc.Class({
     setRopePoint(ropePoint){
         this.ropePoint = ropePoint;
     },
-    setRopePointLoc(ropePointX,ropePointY){
+    setRopePointLoc(ropePointX,ropePointY,maxAngle,limitR){
         this.ropePointLoc = cc.v2(ropePointX,ropePointY);
+        this.maxAngle = maxAngle;
+        this.limitR = limitR;
     },
     getRopePointLoc(){
         return this.ropePointLoc;
@@ -109,17 +111,15 @@ cc.Class({
         this.ropePoint.addChild(rope);
     },
 
-    swingNow(rope,maxAngle,swingSpeed,swingRepeat){
+    swingNow(rope,swingSpeed,swingRepeat){
         if(this.jumping == true || this.pauseing == true && this.stoping == false){
 
             this.rope = rope;
             this.swingR = cc.pDistance(cc.v2(this.node.x,this.node.y),this.ropePointLoc);
             this.swingAngle = Math.atan(Math.abs(this.node.x-this.ropePointLoc.x)/Math.abs(this.node.y-this.ropePointLoc.y))/Math.PI*180;
-            this.maxAngle = maxAngle;
             this.swingSpeed = swingSpeed;
             this.swingRepeat = swingRepeat;
             this.getComponent(cc.RigidBody).linearVelocity = cc.v2(0,0);
-            this.limitR = this.ropePoint.getComponent("PassRopepointControl").limitR;
 
             if(this.rope.getComponent("RopeControl").hanged(this.swingR,this.limitR,this.swingAngle) == false)
                 return;

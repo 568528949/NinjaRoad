@@ -55,10 +55,9 @@ cc.Class({
             this.playerControl.addRope(this.rope);
 
             if(true){
-                var maxAngle = this.ropeMaxAngle;
                 var swingSpeed = this.ropeSwingSpeed;
                 var swingRepeat = this.ropeSwingRepeat;
-                this.playerControl.swingNow(this.rope,maxAngle,swingSpeed,swingRepeat);
+                this.playerControl.swingNow(this.rope,swingSpeed,swingRepeat);
             }
 
             this.ifBegin = true;
@@ -184,7 +183,6 @@ cc.Class({
 
         this.reboundSpeedTotal = this.ActionConfig.reboundSpeedTotal;
 
-        this.ropeMaxAngle = this.ActionConfig.ropeMaxAngle;
         this.ropeSwingSpeed = this.ActionConfig.ropeSwingSpeed;
         this.ropeSwingRepeat = this.ActionConfig.ropeSwingRepeat;
         this.ropeStopJumpSpeedX = this.ActionConfig.ropeStopJumpSpeedX;
