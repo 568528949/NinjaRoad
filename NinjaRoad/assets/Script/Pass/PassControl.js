@@ -37,11 +37,11 @@ cc.Class({
         for(var i=1;i<sequenceNum;i++){
             var nextPassPossible = this.passLimitMap.get(this.passSequence[i-1]);
             var nextPassWeight = this.passLimitWightMapAll.get(this.passSequence[i-1]);
-            //var nextPassIndex = this.MyMath.randomByWeight(0,nextPassPossible.length-1,nextPassWeight);
-            var nextPassIndex = this.MyMath.random(0,nextPassPossible.length-1);
+            var nextPassIndex = this.MyMath.randomByWeight(0,nextPassPossible.length-1,nextPassWeight);
+            //var nextPassIndex = this.MyMath.random(0,nextPassPossible.length-1);
             this.passSequence[i] = nextPassPossible[nextPassIndex];
         }
-        //this.passSequence = ["P000","P021","P021","P023","P012"];
+        //this.passSequence = ["P003","S012","P000"];
     },
 
     initPass(){

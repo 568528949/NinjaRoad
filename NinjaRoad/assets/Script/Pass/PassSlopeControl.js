@@ -20,6 +20,8 @@ cc.Class({
     },
 
     onEndContact(contact, self, other){
+        //this.playerControl.slopeStop();
+        other.getComponent("PlayerControl").jumpNow(0,0,0);
     },
 
     // LIFE-CYCLE CALLBACKS:

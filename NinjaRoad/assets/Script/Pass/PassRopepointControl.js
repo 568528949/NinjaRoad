@@ -20,7 +20,7 @@ cc.Class({
     onBeginContact(contact, self, other) {
         other.getComponent("PlayerControl").setRopeInput(true);
         other.getComponent("PlayerControl").setRopePoint(this.node);
-        other.getComponent("PlayerControl").setRopePointLoc(this.node.x,this.node.y,this.maxAngle,this.limitR);
+        other.getComponent("PlayerControl").setRopePointLoc(this.node.x+this.node.parent.x,this.node.y,this.maxAngle,this.limitR);
     },
 
     onLoad () {

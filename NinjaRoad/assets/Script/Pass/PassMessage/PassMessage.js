@@ -29,6 +29,10 @@ cc.Class({
         maxAngle:0,
         limitR:0,
         ropeY:0,
+
+        slopeAngle:0,
+        slopeLength:0,
+        slopeY:0,
     },
 
     // LIFE-CYCLE CALLBACKS:

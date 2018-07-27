@@ -46,6 +46,13 @@ cc.Class({
                     {
                         "nextPass":"P022",
                         "nextWeight":"1"
+                    },{
+                        "nextPass":"R000",
+                        "nextWeight":"5"
+                    },
+                    {
+                        "nextPass":"R001",
+                        "nextWeight":"5"
                     }]
                 },
         
@@ -196,6 +203,10 @@ cc.Class({
                     {
                         "nextPass":"P021",
                         "nextWeight":"1"
+                    },
+                    {
+                        "nextPass":"R000",
+                        "nextWeight":"5"
                     }]
                 },
                 {
@@ -288,6 +299,10 @@ cc.Class({
                     {
                         "nextPass":"P023",
                         "nextWeight":"1"
+                    },
+                    {
+                        "nextPass":"R000",
+                        "nextWeight":"5"
                     }]
                 },
                 {
@@ -340,6 +355,10 @@ cc.Class({
                     {
                         "nextPass":"P023",
                         "nextWeight":"1"
+                    },
+                    {
+                        "nextPass":"R000",
+                        "nextWeight":"5"
                     }]
                 },
                 {
@@ -384,6 +403,10 @@ cc.Class({
                     {
                         "nextPass":"P021",
                         "nextWeight":"1"
+                    },
+                    {
+                        "nextPass":"R000",
+                        "nextWeight":"5"
                     }]
                 },
                 {
@@ -424,6 +447,10 @@ cc.Class({
                     {
                         "nextPass":"P022",
                         "nextWeight":"1"
+                    },
+                    {
+                        "nextPass":"R000",
+                        "nextWeight":"5"
                     }]
                 },
                 {
@@ -475,6 +502,54 @@ cc.Class({
                     },
                     {
                         "nextPass":"P022",
+                        "nextWeight":"1"
+                    }]
+                },
+                {
+                    "key":"R000",
+                    "value":[
+                    {
+                        "nextPass":"P000",
+                        "nextWeight":"1"
+                    },
+                    {
+                        "nextPass":"P001",
+                        "nextWeight":"1"
+                    },
+                    {
+                        "nextPass":"P010",
+                        "nextWeight":"1"
+                    },
+                    {
+                        "nextPass":"P020",
+                        "nextWeight":"1"
+                    },
+                    {
+                        "nextPass":"P021",
+                        "nextWeight":"1"
+                    }]
+                },
+                {
+                    "key":"R001",
+                    "value":[
+                    {
+                        "nextPass":"P000",
+                        "nextWeight":"1"
+                    },
+                    {
+                        "nextPass":"P001",
+                        "nextWeight":"1"
+                    },
+                    {
+                        "nextPass":"P010",
+                        "nextWeight":"1"
+                    },
+                    {
+                        "nextPass":"P020",
+                        "nextWeight":"1"
+                    },
+                    {
+                        "nextPass":"P021",
                         "nextWeight":"1"
                     }]
                 }

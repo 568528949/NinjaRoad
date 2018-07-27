@@ -43,6 +43,10 @@ cc.Class({
         if(interval != weightList.length)
             return;
 
+        for(var i =0;i<weightList.length;i++){
+            weightList[i] = parseInt(weightList[i]);
+        }
+
         var allWeight = 0;
         for(var i=0;i<weightList.length;i++){
             allWeight +=weightList[i];
