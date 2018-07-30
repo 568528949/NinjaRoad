@@ -40,7 +40,7 @@ cc.Class({
         this.canvasWidth = StableConfig.canvasWidth;
         this.backgroundHeight = StableConfig.backgroundHeight;
         this.backgroundWidth = StableConfig.backgroundWidth;
-        this.backgroundNum = StableConfig.backgroundNum;
+        this.backgroundNum = StableConfig.passMetelWidth * StableConfig.passMetelNum / StableConfig.backgroundWidth;
 
         this.backgroundList = [];
         this.backgroundIndex =0;

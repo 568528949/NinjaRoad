@@ -21,7 +21,12 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
+    onLoad () {
+        var StableConfig = cc.find("Canvas/ConfigLayer").getComponent("StableConfig");
+        this.node.width = StableConfig.passMetelWidth * StableConfig.passMetelNum;
+        this.node.getComponent(cc.PhysicsBoxCollider).size.width = this.node.width;
+        this.node.getComponent(cc.PhysicsBoxCollider).offset.x = this.node.width/2;
+    },
 
     start () {
 

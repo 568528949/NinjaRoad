@@ -209,7 +209,8 @@
     "canvasWidth": 1136,
     "backgroundHeight": 640,
     "backgroundWidth": 500,
-    "backgroundNum": 30,
+    "passMetelWidth": 800,
+    "passMetelNum": 20,
     "moveSpeed": 0.5,
     "enabledDebugDraw": true,
     "enabledDrawBoundingBox": true
@@ -634,12 +635,12 @@
     "body": null,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": 5680,
+      "x": 568,
       "y": 5
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 11360,
+      "width": 1136,
       "height": 10
     }
   },

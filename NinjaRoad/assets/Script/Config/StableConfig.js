@@ -19,7 +19,11 @@ cc.Class({
         //Background相关参数
         backgroundHeight : 550,
         backgroundWidth : 500,
-        backgroundNum : 20,
+        //backgroundNum : 48,
+
+        //Pass相关参数
+        passMetelWidth : 800,
+        passMetelNum :30,
 
         //全局移动动画速度
         moveSpeed : 0.2,

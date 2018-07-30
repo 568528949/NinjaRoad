@@ -30,34 +30,33 @@ cc.Class({
     },
 
     initPassSequence(){
-        var sequenceNum = 50;
+        var StableConfig = cc.find("Canvas/ConfigLayer").getComponent("StableConfig");
+        var allPassWidth = StableConfig.passMetelWidth * StableConfig.passMetelNum;
+
         this.passSequence = [];
+        this.nextX = 0;
 
         this.passSequence[0] = "P000";
-        for(var i=1;i<sequenceNum;i++){
-            var nextPassPossible = this.passLimitMap.get(this.passSequence[i-1]);
-            var nextPassWeight = this.passLimitWightMapAll.get(this.passSequence[i-1]);
-            var nextPassIndex = this.MyMath.randomByWeight(0,nextPassPossible.length-1,nextPassWeight);
-            //var nextPassIndex = this.MyMath.random(0,nextPassPossible.length-1);
-            this.passSequence[i] = nextPassPossible[nextPassIndex];
+        for(var i=0;;i++){
+            if(this.nextX >= allPassWidth)
+                break;
+
+            if(i == 0)
+                this.passSequence[0] = "P000";
+            else{
+                var nextPassPossible = this.passLimitMap.get(this.passSequence[i-1]);
+                var nextPassWeight = this.passLimitWightMapAll.get(this.passSequence[i-1]);
+                var nextPassIndex = this.MyMath.randomByWeight(0,nextPassPossible.length-1,nextPassWeight);
+                //var nextPassIndex = this.MyMath.random(0,nextPassPossible.length-1);
+                this.passSequence[i] = nextPassPossible[nextPassIndex];
+            }
+            
+            var passVar = cc.instantiate(this.passPrefabList[this.passNameMap.get(this.passSequence[i])]);
+            passVar.x = this.nextX;
+            this.nextX += passVar.width;
+            this.node.parent.addChild(passVar);
         }
         //this.passSequence = ["P003","S012","P000"];
-    },
-
-    initPass(){
-        this.nextX = 0;
-        for(var i = 0 ;i< this.passSequence.length;i++){
-            
-            if(true){
-                var passVar = cc.instantiate(this.passPrefabList[this.passNameMap.get(this.passSequence[i])]);
-                passVar.x = this.nextX;
-                this.nextX += passVar.width;
-                this.node.parent.addChild(passVar);
-            }
-            else{
-
-            }
-        }
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -69,7 +68,6 @@ cc.Class({
         this.initPassLimit();
         this.initPassNameMap();
         this.initPassSequence();
-        this.initPass();
     },
 
     start () {
