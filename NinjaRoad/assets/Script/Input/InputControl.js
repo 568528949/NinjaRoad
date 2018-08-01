@@ -36,7 +36,7 @@ cc.Class({
         this.beginX = event.getLocation().x;
         this.beginY = event.getLocation().y;
 
-        if(this.playerControl.getJumpInput() == true){
+        if(this.playerControl.getJumpInput() == true && this.playerControl.slopeing == false){
             this.playerControl.jumpNow(this.jumpSpeedX,this.jumpSpeedY,1);
             this.playerControl.setJumpInput(false);
 
@@ -74,7 +74,9 @@ cc.Class({
         }
 
         if(this.playerControl.slopeing == true){
-            this.playerControl.slopeStop();
+            var slopeSpeedY = this.slopeSpeedY;
+            var slopeSpeedWeight = this.slopeSpeedWeight;
+            this.playerControl.slopeStop(slopeSpeedY,slopeSpeedWeight);
 
             this.ifBegin = true;
             return;
@@ -187,8 +189,9 @@ cc.Class({
         this.ropeSwingRepeat = this.ActionConfig.ropeSwingRepeat;
         this.ropeStopJumpSpeedX = this.ActionConfig.ropeStopJumpSpeedX;
         this.ropeStopJumpSpeedY = this.ActionConfig.ropeStopJumpSpeedY;
-
-        this.slopeSpeed = this.ActionConfig.slopeSpeed;
+        
+        this.slopeSpeedY = this.ActionConfig.slopeSpeedY;
+        this.slopeSpeedWeight = this.ActionConfig.slopeSpeedWeight;
     },
 
     update (dt) {

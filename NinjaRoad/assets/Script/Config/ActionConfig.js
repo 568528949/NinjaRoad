@@ -25,7 +25,9 @@ cc.Class({
         ropeStopJumpSpeedX : 300,
         ropeStopJumpSpeedY : 800,
 
-        slopeSpeed : 300,
+        slopeSpeedX : 300,
+        slopeSpeedY : 800,
+        slopeSpeedWeight : 1.5,
     },
 
     // LIFE-CYCLE CALLBACKS:

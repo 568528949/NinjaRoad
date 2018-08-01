@@ -24,6 +24,7 @@ cc.Class({
     },
 
     onLoad () {
+        this.node.getChildByName("arrow").opacity = 255;
     },
 
     start () {

@@ -16,20 +16,25 @@ cc.Class({
     },
 
     onBeginContact(contact, self, other) {
-        other.getComponent("PlayerControl").slopeNow(this.slopeSpeed,this.slopeAngle);
+        other.getComponent("PlayerControl").slopeNow(this.slopeSpeedX,this.slopeAngle);
     },
 
     onEndContact(contact, self, other){
-        //this.playerControl.slopeStop();
-        other.getComponent("PlayerControl").jumpNow(0,0,0);
+
+        if(cc.pDistance(this.loc,cc.v2(other.node.x,other.node.y)) < this.range)
+            return;
+
+        other.getComponent("PlayerControl").changeActionState("jumping");
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
         this.ActionConfig = cc.find("Canvas/ConfigLayer").getComponent("ActionConfig");
-        this.slopeSpeed = this.ActionConfig.slopeSpeed;
+        this.slopeSpeedX = this.ActionConfig.slopeSpeedX;
         this.slopeAngle = this.node.rotation;
+        this.loc = cc.v2(this.node.x,this.node.y);
+        this.range = Math.sqrt(this.node.width*this.node.width + this.node.height*this.node.height);
     },
 
     start () {

@@ -157,10 +157,11 @@ cc.Class({
         } 
     },
 
-    slopeStop(){
+    slopeStop(slopeSpeedY,slopeSpeedWeight){
         var speedx = this.getComponent(cc.RigidBody).linearVelocity.x;
-        var speedy = 800;
-        this.getComponent(cc.RigidBody).linearVelocity = cc.v2(speedx*1.5,speedy);
+        var speedy = slopeSpeedY;
+        var slopeSpeedWeight = slopeSpeedWeight;
+        this.getComponent(cc.RigidBody).linearVelocity = cc.v2(speedx*slopeSpeedWeight,speedy);
         this.changeActionState("jumping");
     },
 

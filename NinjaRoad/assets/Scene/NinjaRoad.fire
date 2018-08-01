@@ -259,7 +259,9 @@
     "ropeSwingRepeat": 3,
     "ropeStopJumpSpeedX": 300,
     "ropeStopJumpSpeedY": 800,
-    "slopeSpeed": 300
+    "slopeSpeedX": 300,
+    "slopeSpeedY": 800,
+    "slopeSpeedWeight": 1.5
   },
   {
     "__type__": "3eacfNrxoNNjIYgAoY+U+Hs",
@@ -1017,8 +1019,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 183,
-      "y": 397
+      "x": 114,
+      "y": 530
     },
     "_skewX": 0,
     "_skewY": 0,

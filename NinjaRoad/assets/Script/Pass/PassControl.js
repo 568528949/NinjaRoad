@@ -36,7 +36,20 @@ cc.Class({
         this.passSequence = [];
         this.nextX = 0;
 
-        this.passSequence[0] = "P000";
+
+        var debug = false;
+        if(debug == true){
+            this.passSequence = ["P012","S001","S001"];
+            for(var i = 0;i < this.passSequence.length;i++){
+                var passVar = cc.instantiate(this.passPrefabList[this.passNameMap.get(this.passSequence[i])]);
+                passVar.x = this.nextX;
+                this.nextX += passVar.width;
+                this.node.parent.addChild(passVar);
+            }
+            return;
+        }
+
+
         for(var i=0;;i++){
             if(this.nextX >= allPassWidth)
                 break;
