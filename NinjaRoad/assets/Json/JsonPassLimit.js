@@ -23,27 +23,27 @@ cc.Class({
                     "value":[
                         {
                             "nextPass":"P001",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P002",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P011",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P012",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P021",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P022",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"R000",
@@ -51,6 +51,18 @@ cc.Class({
                         },
                         {
                             "nextPass":"R001",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R002",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R010",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R011",
                             "nextWeight":1
                         }
                     ],
@@ -60,39 +72,39 @@ cc.Class({
                     "value":[
                         {
                             "nextPass":"P000",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P002",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P003",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P010",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P012",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P013",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P020",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P022",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P023",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"R000",
@@ -100,6 +112,18 @@ cc.Class({
                         },
                         {
                             "nextPass":"R001",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R002",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R010",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R011",
                             "nextWeight":1
                         }
                     ],
@@ -109,39 +133,39 @@ cc.Class({
                     "value":[
                         {
                             "nextPass":"P000",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P001",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P003",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P010",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P011",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P013",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P020",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P021",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P023",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"R000",
@@ -150,6 +174,22 @@ cc.Class({
                         {
                             "nextPass":"R001",
                             "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R002",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R010",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R011",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"S002",
+                            "nextWeight":10
                         }
                     ],
                     "key":"P002"
@@ -158,39 +198,39 @@ cc.Class({
                     "value":[
                         {
                             "nextPass":"P000",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P001",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P002",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P010",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P011",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P012",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P020",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P021",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P022",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"R000",
@@ -199,6 +239,26 @@ cc.Class({
                         {
                             "nextPass":"R001",
                             "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R002",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R010",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R011",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"S001",
+                            "nextWeight":10
+                        },
+                        {
+                            "nextPass":"S002",
+                            "nextWeight":10
                         }
                     ],
                     "key":"P003"
@@ -207,27 +267,27 @@ cc.Class({
                     "value":[
                         {
                             "nextPass":"P000",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P001",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P010",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P011",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P020",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P021",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"R000",
@@ -236,6 +296,22 @@ cc.Class({
                         {
                             "nextPass":"R001",
                             "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R002",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R010",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R011",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"S002",
+                            "nextWeight":10
                         }
                     ],
                     "key":"P010"
@@ -244,39 +320,39 @@ cc.Class({
                     "value":[
                         {
                             "nextPass":"P000",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P001",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P002",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P010",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P011",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P012",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P020",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P021",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P022",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"R000",
@@ -285,6 +361,26 @@ cc.Class({
                         {
                             "nextPass":"R001",
                             "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R002",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R010",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R011",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"S001",
+                            "nextWeight":10
+                        },
+                        {
+                            "nextPass":"S002",
+                            "nextWeight":10
                         }
                     ],
                     "key":"P011"
@@ -293,51 +389,51 @@ cc.Class({
                     "value":[
                         {
                             "nextPass":"P000",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P001",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P002",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P003",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P010",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P011",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P012",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P013",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P020",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P021",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P022",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P023",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"R000",
@@ -346,6 +442,26 @@ cc.Class({
                         {
                             "nextPass":"R001",
                             "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R002",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R010",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R011",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"S001",
+                            "nextWeight":10
+                        },
+                        {
+                            "nextPass":"S002",
+                            "nextWeight":10
                         }
                     ],
                     "key":"P012"
@@ -354,51 +470,51 @@ cc.Class({
                     "value":[
                         {
                             "nextPass":"P000",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P001",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P002",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P003",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P010",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P011",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P012",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P013",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P020",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P021",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P022",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P023",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"R000",
@@ -407,6 +523,26 @@ cc.Class({
                         {
                             "nextPass":"R001",
                             "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R002",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R010",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R011",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"S001",
+                            "nextWeight":10
+                        },
+                        {
+                            "nextPass":"S002",
+                            "nextWeight":10
                         }
                     ],
                     "key":"P013"
@@ -415,18 +551,26 @@ cc.Class({
                     "value":[
                         {
                             "nextPass":"P000",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P010",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P020",
+                            "nextWeight":3
+                        },
+                        {
+                            "nextPass":"R002",
                             "nextWeight":1
                         },
                         {
-                            "nextPass":"R001",
+                            "nextPass":"R010",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R011",
                             "nextWeight":1
                         }
                     ],
@@ -436,27 +580,27 @@ cc.Class({
                     "value":[
                         {
                             "nextPass":"P000",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P001",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P010",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P011",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P020",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P021",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"R000",
@@ -465,6 +609,22 @@ cc.Class({
                         {
                             "nextPass":"R001",
                             "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R002",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R010",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R011",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"S002",
+                            "nextWeight":10
                         }
                     ],
                     "key":"P021"
@@ -473,39 +633,39 @@ cc.Class({
                     "value":[
                         {
                             "nextPass":"P000",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P001",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P002",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P010",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P011",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P012",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P020",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P021",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P022",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"R000",
@@ -514,6 +674,22 @@ cc.Class({
                         {
                             "nextPass":"R001",
                             "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R002",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R010",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R011",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"S002",
+                            "nextWeight":10
                         }
                     ],
                     "key":"P022"
@@ -522,47 +698,51 @@ cc.Class({
                     "value":[
                         {
                             "nextPass":"P000",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P001",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P002",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P003",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P010",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P011",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P012",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P013",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P020",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P021",
-                            "nextWeight":1
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"P022",
-                            "nextWeight":1
+                            "nextWeight":3
+                        },
+                        {
+                            "nextPass":"P023",
+                            "nextWeight":3
                         },
                         {
                             "nextPass":"R000",
@@ -571,6 +751,26 @@ cc.Class({
                         {
                             "nextPass":"R001",
                             "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R002",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R010",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R011",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"S001",
+                            "nextWeight":10
+                        },
+                        {
+                            "nextPass":"S002",
+                            "nextWeight":10
                         }
                     ],
                     "key":"P023"
@@ -608,6 +808,22 @@ cc.Class({
                         {
                             "nextPass":"R001",
                             "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R002",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R010",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R011",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"S002",
+                            "nextWeight":10
                         }
                     ],
                     "key":"R000"
@@ -645,25 +861,138 @@ cc.Class({
                         {
                             "nextPass":"R001",
                             "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R002",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R010",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R011",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"S002",
+                            "nextWeight":10
                         }
                     ],
                     "key":"R001"
                 },
                 {
                     "value":[
-                        
+                        {
+                            "nextPass":"P000",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"P010",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"P020",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R000",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R001",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R002",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R010",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R011",
+                            "nextWeight":1
+                        }
                     ],
                     "key":"R002"
                 },
                 {
                     "value":[
-                        
+                        {
+                            "nextPass":"P000",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"P010",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"P020",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R010",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R011",
+                            "nextWeight":1
+                        }
                     ],
                     "key":"R010"
                 },
                 {
                     "value":[
-                        
+                        {
+                            "nextPass":"P000",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"P001",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"P010",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"P011",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"P020",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"P021",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R000",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R001",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R002",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R010",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R011",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"S002",
+                            "nextWeight":10
+                        }
                     ],
                     "key":"R011"
                 },
@@ -764,23 +1093,11 @@ cc.Class({
                             "nextWeight":1
                         },
                         {
-                            "nextPass":"P003",
-                            "nextWeight":1
-                        },
-                        {
                             "nextPass":"P011",
                             "nextWeight":1
                         },
                         {
                             "nextPass":"P012",
-                            "nextWeight":1
-                        },
-                        {
-                            "nextPass":"P013",
-                            "nextWeight":1
-                        },
-                        {
-                            "nextPass":"P020",
                             "nextWeight":1
                         },
                         {
@@ -792,19 +1109,74 @@ cc.Class({
                             "nextWeight":1
                         },
                         {
-                            "nextPass":"P023",
+                            "nextPass":"R002",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R010",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R011",
                             "nextWeight":1
                         },
                         {
                             "nextPass":"S001",
                             "nextWeight":1
+                        },
+                        {
+                            "nextPass":"S002",
+                            "nextWeight":10
                         }
                     ],
                     "key":"S001"
                 },
                 {
                     "value":[
-                        
+                        {
+                            "nextPass":"P000",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"P001",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"P010",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"P011",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"P021",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R000",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R001",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R002",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R010",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"R011",
+                            "nextWeight":1
+                        },
+                        {
+                            "nextPass":"S002",
+                            "nextWeight":10
+                        }
                     ],
                     "key":"S002"
                 },
@@ -912,6 +1284,9 @@ cc.Class({
                 }
             ]
         }
+                
+                
+        
         
         
     },

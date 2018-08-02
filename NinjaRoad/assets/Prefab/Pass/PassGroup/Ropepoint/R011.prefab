@@ -301,7 +301,7 @@
     },
     "_enabled": true,
     "limitR": 370,
-    "maxAngle": 60
+    "maxAngle": 30
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -327,7 +327,10 @@
     "platformY": 0,
     "maxAngle": 60,
     "limitR": 370,
-    "ropeY": 450
+    "ropeY": 450,
+    "slopeAngle": 0,
+    "slopeLength": 0,
+    "slopeY": 0
   },
   {
     "__type__": "cc.PrefabInfo",

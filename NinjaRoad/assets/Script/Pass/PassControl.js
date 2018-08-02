@@ -39,7 +39,7 @@ cc.Class({
 
         var debug = false;
         if(debug == true){
-            this.passSequence = ["P012","S001","S001"];
+            this.passSequence = ["P011","S002","S002"];
             for(var i = 0;i < this.passSequence.length;i++){
                 var passVar = cc.instantiate(this.passPrefabList[this.passNameMap.get(this.passSequence[i])]);
                 passVar.x = this.nextX;

@@ -21,9 +21,11 @@ cc.Class({
 
     onEndContact(contact, self, other){
 
-        if(cc.pDistance(this.loc,cc.v2(other.node.x,other.node.y)) < this.range)
+        if(cc.pDistance(this.loc,cc.v2(other.node.x,other.node.y)) < this.range){
+            other.getComponent("PlayerControl").setJumpInput(false);
             return;
-
+        }
+            
         other.getComponent("PlayerControl").changeActionState("jumping");
     },
 
@@ -33,7 +35,7 @@ cc.Class({
         this.ActionConfig = cc.find("Canvas/ConfigLayer").getComponent("ActionConfig");
         this.slopeSpeedX = this.ActionConfig.slopeSpeedX;
         this.slopeAngle = this.node.rotation;
-        this.loc = cc.v2(this.node.x,this.node.y);
+        this.loc = cc.v2(this.node.x+this.node.parent.x,this.node.y+this.node.parent.y);
         this.range = Math.sqrt(this.node.width*this.node.width + this.node.height*this.node.height);
     },
 

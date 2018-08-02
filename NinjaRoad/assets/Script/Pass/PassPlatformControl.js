@@ -24,6 +24,7 @@ cc.Class({
 
     onEndContact(contact, self, other){
         other.getComponent("PlayerControl").jumpNow(0,0,0);
+        other.getComponent("PlayerControl").setJumpInput(false);
     },
     // LIFE-CYCLE CALLBACKS:
 
